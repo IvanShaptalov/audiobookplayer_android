@@ -76,7 +76,9 @@ class SampleItemListView extends StatelessWidget {
         // builds Widgets as they’re scrolled into view.
 
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Column(children: [
             Container(
               height: default_row_heigth,
               child: ListView.builder(
@@ -151,8 +153,9 @@ class SampleItemListView extends StatelessWidget {
                       color: Colors.amber,
                     )),
               ],
-            ),
-            Text('new row')
+            ),],),
+            Align( // place to player
+              alignment: Alignment.bottomCenter, child: Text('place to player')),
           ],
         ));
   }
