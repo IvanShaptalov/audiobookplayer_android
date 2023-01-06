@@ -21,6 +21,10 @@ class SampleItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double default_row_heigth =
+        MediaQuery.of(context).size.width / (items.length * 2);
+    double default_current_playing_part_width =
+        MediaQuery.of(context).size.width / 2.5;
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           items: [
@@ -74,7 +78,7 @@ class SampleItemListView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height / items.length,
+              height: default_row_heigth,
               child: ListView.builder(
                 // Providing a restorationId allows the ListView to restore the
                 // scroll position when a user leaves and returns to the app after it
@@ -89,29 +93,56 @@ class SampleItemListView extends StatelessWidget {
                       margin: EdgeInsets.symmetric(vertical: 20.0),
                       width: MediaQuery.of(context).size.width / items.length,
                       color: Color.fromARGB(179, 48, 194, 109),
-                      child: ListTile(
-                          title: Text('${item.title}'),
-                          leading: const CircleAvatar(
-                            // Display the Flutter Logo image asset.
-                            foregroundImage:
-                                AssetImage('assets/images/flutter_logo.png'),
-                          ),
-                          onTap: () {
-                            // Navigate to the details page. If the user leaves and returns to
-                            // the app after it has been killed while running in the
-                            // background, the navigation stack is restored.
-                            Navigator.restorablePushNamed(
-                              context,
-                              SampleItemDetailsView.routeName,
-                            );
-                          }));
+                      // ignore: prefer_const_constructors
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: ListTile(
+                              title: Text('${item.title}'),
+                              leading: const CircleAvatar(
+                                // Display the Flutter Logo image asset.
+                                foregroundImage: AssetImage(
+                                    'assets/images/flutter_logo.png'),
+                              ),
+                              onTap: () {
+                                // Navigate to the details page. If the user leaves and returns to
+                                // the app after it has been killed while running in the
+                                // background, the navigation stack is restored.
+                                Navigator.restorablePushNamed(
+                                  context,
+                                  SampleItemDetailsView.routeName,
+                                );
+                              })
+                              )
+                              );
                 },
               ),
-            )
-          ,
-          Text('new row'),
-          Text('new row')],
-          
+            ),
+            ListTile(// Last Achievement
+                              title: Text('last achievement'),
+                              leading: const CircleAvatar(
+                                // Display the Flutter Logo image asset.
+                                foregroundImage: AssetImage(
+                                    'assets/images/flutter_logo.png'),
+                              ),
+                              onTap: () {
+                                // Navigate to the details page. If the user leaves and returns to
+                                // the app after it has been killed while running in the
+                                // background, the navigation stack is restored.
+                                Navigator.restorablePushNamed(
+                                  context,
+                                  SampleItemDetailsView.routeName,
+                                );
+                              }),
+            Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  height: default_row_heigth,
+                  width: default_current_playing_part_width,
+                  child: Text('new row'),
+                  color: Colors.amber,
+                )),
+            Text('new row')
+          ],
         ));
   }
 }
