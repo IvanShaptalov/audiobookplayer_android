@@ -1,3 +1,4 @@
+import 'package:audiobook_player/src/config/config.dart';
 import 'package:flutter/material.dart';
 
 import '../../sample_item_details_view.dart';
@@ -6,12 +7,10 @@ class LastAchievement extends StatelessWidget {
   // int result = player.playBytes(audiobytes);
   @override
   Widget build(BuildContext context) {
-    double default_achievement_width = MediaQuery.of(context).size.width / 3;
-    double default_achievement_height= MediaQuery.of(context).size.height / 6;
     return Container(
         margin: EdgeInsets.symmetric(vertical: 20.0),
-        width: default_achievement_width,
-        height: default_achievement_height,
+        width: LastAchievementsConfig.getDefaultRowWidth(context),
+        height: LastAchievementsConfig.getDefaultRowHeight(context),
         color: Color.fromARGB(179, 48, 194, 109),
         child: Align(
           alignment: Alignment.centerLeft,

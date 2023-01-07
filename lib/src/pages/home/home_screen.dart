@@ -1,3 +1,4 @@
+import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/view/current_playing.dart';
 import 'package:audiobook_player/src/pages/home/view/last_achievement.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
@@ -28,10 +29,7 @@ class SampleItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double default_row_heigth =
-        MediaQuery.of(context).size.height / 6;
-    double default_current_playing_part_width =
-        MediaQuery.of(context).size.width / 2;
+    
     
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
@@ -80,7 +78,7 @@ class SampleItemListView extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: default_row_heigth,
+                  height: RecentAudiobooksConfig.getDefaultRowHeight(context),
                   child: Scrollbar(
                     scrollbarOrientation: ScrollbarOrientation.bottom,
                     thumbVisibility: true,
@@ -96,13 +94,13 @@ class SampleItemListView extends StatelessWidget {
 
                         return Container(
                             margin: EdgeInsets.symmetric(vertical: 20.0),
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: RecentAudiobooksConfig.getDefaultElementWidth(context),
                             color: Color.fromARGB(179, 48, 194, 109),
                             // ignore: prefer_const_constructors
                             child: Align(
                                 alignment: Alignment.center,
                                 child: ListTile(
-                                    title: Text('${item.title}', maxLines: 2),
+                                    title: Text('${item.title}', maxLines: RecentAudiobooksConfig.maxLines),
                                     leading: const CircleAvatar(
                                       // Display the Flutter Logo image asset.
                                       foregroundImage: AssetImage(
