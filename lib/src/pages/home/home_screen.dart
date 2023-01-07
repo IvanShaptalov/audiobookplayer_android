@@ -31,40 +31,7 @@ class SampleItemListView extends StatelessWidget {
   Widget build(BuildContext context) {
     
     
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('home page'),
-          actions: [
-            IconButton(
-              alignment: Alignment.centerRight,
-              icon: const Icon(Icons.image),
-              onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
-              },
-            ),
-          ],
-        ),
-
-        // To work with lists that may contain a large number of items, it’s best
-        // to use the ListView.builder constructor.
-        //
-        // In contrast to the default ListView constructor, which requires
-        // building all Widgets up front, the ListView.builder constructor lazily
-        // builds Widgets as they’re scrolled into view.
-
-        body: Column(
+    return Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
@@ -121,8 +88,7 @@ class SampleItemListView extends StatelessWidget {
                 ),
               ],
             ),
-            Player(),
           ],
-        ));
+        );
   }
 }

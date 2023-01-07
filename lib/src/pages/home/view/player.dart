@@ -25,12 +25,16 @@ class Player extends StatelessWidget {
   // int result = player.playBytes(audiobytes);
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return Align(
+      child: IconButton(
+        alignment: Alignment.bottomCenter,
         icon: const Icon(Icons.play_arrow),
         onPressed: () {
           playAudio();
           print("good, audio played");
         },
-      );
+      ),
+      
+    );
   }
 }
