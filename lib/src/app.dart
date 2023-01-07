@@ -6,6 +6,7 @@ import 'pages/sample_item_details_view.dart';
 import 'pages/home/home_screen.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
+import 'pages/home/view/player.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -70,7 +71,8 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
+                    // return const SampleItemDetailsView();
+                    return Player();
                   case SampleItemListView.routeName:
                   default:
                     return const SampleItemListView();
