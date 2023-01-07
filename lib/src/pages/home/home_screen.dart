@@ -23,7 +23,7 @@ class SampleItemListView extends StatelessWidget {
     ],
   });
 
-  static const routeName = '/';
+  // static const routeName = '/';
 
   final List<SampleItem> items;
 
@@ -32,14 +32,6 @@ class SampleItemListView extends StatelessWidget {
     
     
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.my_library_books), label: "Library"),
-          ],
-        ),
         appBar: AppBar(
           title: const Text('home page'),
           actions: [
