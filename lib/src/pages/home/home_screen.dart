@@ -24,66 +24,66 @@ class SampleItemListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    
     return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
           children: [
-            Column(
-              children: [
-                Container(
-                  height: RecentAudiobooksConfig.getDefaultRowHeight(context),
-                  child: Scrollbar(
-                    scrollbarOrientation: ScrollbarOrientation.bottom,
-                    thumbVisibility: true,
-                    child: ListView.builder(
-                      // Providing a restorationId allows the ListView to restore the
-                      // scroll position when a user leaves and returns to the app after it
-                      // has been killed while running in the background.
-                      restorationId: 'sampleItemListView',
-                      scrollDirection: Axis.horizontal,
-                      itemCount: items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final item = items[index];
+            Container(
+              height: RecentAudiobooksConfig.getDefaultRowHeight(context),
+              child: Scrollbar(
+                scrollbarOrientation: ScrollbarOrientation.bottom,
+                thumbVisibility: true,
+                child: ListView.builder(
+                  // Providing a restorationId allows the ListView to restore the
+                  // scroll position when a user leaves and returns to the app after it
+                  // has been killed while running in the background.
+                  restorationId: 'sampleItemListView',
+                  scrollDirection: Axis.horizontal,
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = items[index];
 
-                        return Container(
-                            margin: EdgeInsets.symmetric(vertical: 20.0),
-                            width: RecentAudiobooksConfig.getDefaultElementWidth(context),
-                            color: Color.fromARGB(179, 48, 194, 109),
-                            // ignore: prefer_const_constructors
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: ListTile(
-                                    title: Text('${item.title}', maxLines: RecentAudiobooksConfig.maxLines),
-                                    leading: const CircleAvatar(
-                                      // Display the Flutter Logo image asset.
-                                      foregroundImage: AssetImage(
-                                          'assets/images/flutter_logo.png'),
-                                    ),
-                                    onTap: () {
-                                      // Navigate to the details page. If the user leaves and returns to
-                                      // the app after it has been killed while running in the
-                                      // background, the navigation stack is restored.
-                                      Navigator.restorablePushNamed(
-                                        context,
-                                        SampleItemDetailsView.routeName,
-                                      );
-                                    })));
-                      },
-                    ),
-                  ),
+                    return Container(
+                        margin: EdgeInsets.symmetric(vertical: 20.0),
+                        width: RecentAudiobooksConfig.getDefaultElementWidth(
+                            context),
+                        color: Color.fromARGB(179, 48, 194, 109),
+                        // ignore: prefer_const_constructors
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: ListTile(
+                                title: Text('${item.title}',
+                                    maxLines: RecentAudiobooksConfig.maxLines),
+                                leading: const CircleAvatar(
+                                  // Display the Flutter Logo image asset.
+                                  foregroundImage: AssetImage(
+                                      'assets/images/flutter_logo.png'),
+                                ),
+                                onTap: () {
+                                  // Navigate to the details page. If the user leaves and returns to
+                                  // the app after it has been killed while running in the
+                                  // background, the navigation stack is restored.
+                                  Navigator.restorablePushNamed(
+                                    context,
+                                    SampleItemDetailsView.routeName,
+                                  );
+                                })));
+                  },
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    LastAchievement(),
-                            // child: LastAchievement()
-                    CurrentPlayingBook(),
-                  ],
-                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LastAchievement(),
+                // child: LastAchievement()
+                CurrentPlayingBook(),
               ],
             ),
           ],
-        );
+        ),
+      ],
+    );
   }
 }
