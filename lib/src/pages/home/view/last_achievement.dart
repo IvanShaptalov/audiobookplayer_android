@@ -1,7 +1,7 @@
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:flutter/material.dart';
 
-import '../../sample_item_details_view.dart';
+import 'sample_item_details_view.dart';
 
 class LastAchievement extends StatelessWidget {
   // int result = player.playBytes(audiobytes);

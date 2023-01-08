@@ -1,12 +1,9 @@
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/view/current_playing.dart';
 import 'package:audiobook_player/src/pages/home/view/last_achievement.dart';
-import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:flutter/material.dart';
-
-import '../../settings/settings_view.dart';
 import '../sample_item.dart';
-import '../sample_item_details_view.dart';
+import 'view/sample_item_details_view.dart';
 
 /// Displays a list of SampleItems.
 class SampleItemListView extends StatelessWidget {
@@ -22,8 +19,6 @@ class SampleItemListView extends StatelessWidget {
       SampleItem(7, 'Audiobook7'),
     ],
   });
-
-  // static const routeName = '/';
 
   final List<SampleItem> items;
 

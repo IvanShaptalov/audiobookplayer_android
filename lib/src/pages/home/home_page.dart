@@ -1,5 +1,7 @@
 import 'package:audiobook_player/src/pages/home/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
+import 'package:audiobook_player/src/pages/libpage/library_screen.dart';
+import 'package:audiobook_player/src/pages/search_page/search_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../settings/settings_view.dart';
@@ -12,14 +14,13 @@ class HomePage extends StatefulWidget {
 
 class _MyApp extends State {
   var _currentPage = 1;
-  var _pages = [Text("Search"), SampleItemListView(), Text("Library")];
+  var _pages = [SearchPage(), SampleItemListView(), Library()];
+  var _pageTitles = ['Search Page', 'Home Page', 'Library Page'];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: "BEKMEK",
-        home: Scaffold(
+    return Scaffold(
             appBar: AppBar(
-              title: const Text('home page'),
+              title: Text(_pageTitles.elementAt(_currentPage)),
               actions: [
                 IconButton(
                   alignment: Alignment.centerRight,
@@ -46,9 +47,7 @@ class _MyApp extends State {
             ),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _pages.elementAt(_currentPage), 
-                Player()],
+              children: [_pages.elementAt(_currentPage), Player()],
             ),
             bottomNavigationBar: BottomNavigationBar(
                 items: [
@@ -65,6 +64,6 @@ class _MyApp extends State {
                   setState(() {
                     _currentPage = inIndex;
                   });
-                })));
+                }));
   }
 }
