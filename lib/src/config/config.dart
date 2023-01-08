@@ -113,3 +113,34 @@ class LibraryConfig {
     return MediaConfig.getNormalSize(currentWidth, _minElementWidth, _maxElementWidth);
   }
 }
+
+
+class SearchPageConfig {
+  static double _minHeight = 100;
+  static double _maxHeight = 150;
+
+  static double _minElementWidth = 200;
+  static double _maxElementWidth = 500;
+
+  static int _maxLines = 2;
+
+  static int get maxLines {
+    return _maxLines;
+  }
+
+  static double getDefaultRowHeight(context) {
+    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
+    return MediaConfig.getNormalSize(
+        currentHeight, _minHeight, _maxHeight); //min _max size checks
+  }
+
+  static double getDefaultElementWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) / 3;
+    return MediaConfig.getNormalSize(currentWidth, _minElementWidth, _maxElementWidth);
+  }
+
+  static MainAxisAlignment getRowAlignment() {
+    return MainAxisAlignment.center;
+  }
+
+}
