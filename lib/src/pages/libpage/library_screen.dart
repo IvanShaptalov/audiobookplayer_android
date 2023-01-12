@@ -1,3 +1,4 @@
+import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/config.dart';
@@ -66,23 +67,34 @@ class Library extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(width: LibraryConfig.getDefaultElementWidth(context),child: 
-                      ListTile(
-                          
-                          title: Text('${item.title}',
-                              maxLines: LibraryConfig.maxLines),
-                          leading: const CircleAvatar(
-                            // Display the Flutter Logo image asset.
-                            foregroundImage:
-                                AssetImage('assets/images/flutter_logo.png'),
-                          ),
-                          onTap: () {
-                            // Navigate to the details page. If the user leaves and returns to
-                            // the app after it has been killed while running in the
-                            // background, the navigation stack is restored.
-                          }),),
-                      IconButton(onPressed: (){}, icon: const Icon(Icons.drag_handle)),
-                      IconButton(alignment: Alignment.centerRight,onPressed: (){}, icon: const Icon(Icons.more_vert)),
+                      Container(
+                        width: LibraryConfig.getDefaultElementWidth(context),
+                        child: ListTile(
+                            title: Text('${item.title}',
+                                maxLines: LibraryConfig.maxLines),
+                            leading: const CircleAvatar(
+                              // Display the Flutter Logo image asset.
+                              foregroundImage:
+                                  AssetImage('assets/images/flutter_logo.png'),
+                            ),
+                            onTap: () {
+                              print("clicked");
+                              Navigator.push(
+                context,
+                MaterialPageRoute(
+                                builder: (context) => AudiobookParts(audiobook: item),
+                              ),
+              );
+                              
+                            }),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.drag_handle)),
+                      IconButton(
+                          alignment: Alignment.centerRight,
+                          onPressed: () {},
+                          icon: const Icon(Icons.more_vert)),
                     ],
                   ));
             },
