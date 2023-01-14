@@ -18,13 +18,15 @@ class AudiobookParts extends StatelessWidget {
         appBar: AppBar(
           title: Text('Audiobook by parts'),
         ),
-        body: AudiobookPartsWidget(audiobook: audiobook, configObj: LibraryConfig.instance));
+        body: Container(
+            child: AudiobookPartsWidget(
+                audiobook: audiobook, configObj: LibraryConfig.instance)));
   }
 }
 
-
 class AudiobookPartsWidget extends StatelessWidget {
-  AudiobookPartsWidget({super.key, required this.audiobook, required this.configObj});
+  AudiobookPartsWidget(
+      {super.key, required this.audiobook, required this.configObj});
 
   final AudiobookPlaylistItem audiobook;
   dynamic configObj;
@@ -32,9 +34,8 @@ class AudiobookPartsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic items = audiobook.parts;
 
-
     return Container(
-        height: MediaQuery.of(context).size.height * 0.6,
+        height: configObj.getDefaultListHeight(context),
         child: Scrollbar(
           scrollbarOrientation: ScrollbarOrientation.right,
           thumbVisibility: true,
@@ -49,42 +50,45 @@ class AudiobookPartsWidget extends StatelessWidget {
               final item = items[index];
 
               return Container(
-                  margin: EdgeInsets.only(right: 20.0, top: 20.0, bottom: 20.0),
-                  width: RecentAudiobooksConfig.getDefaultElementWidth(context),
-                  color: const Color.fromARGB(57, 122, 205, 130),
-                  // ignore: prefer_const_constructors
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: configObj.getDefaultElementWidth(context),
-                        child: ListTile(
-                            title: Text('${audiobook.title}:${item.title}',
-                                maxLines: configObj.maxLines),
-                            leading: const CircleAvatar(
-                              // Display the Flutter Logo image asset.
-                              foregroundImage:
-                                  AssetImage('assets/images/flutter_logo.png'),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      AudiobookExpanded(audiobookPart: item),
-                                ),
-                              );
-                            }),
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.drag_handle)),
-                      IconButton(
-                          alignment: Alignment.centerRight,
-                          onPressed: () {},
-                          icon: const Icon(Icons.more_vert)),
-                    ],
-                  ));
+                margin: EdgeInsets.only(right: 20.0, top: 20.0, bottom: 20.0),
+                width: configObj.getDefaultElementWidth(context),
+                color: const Color.fromARGB(57, 122, 205, 130),
+                // ignore: prefer_const_constructors
+                child: Container(
+                    width: configObj.getDefaultRowWidth(context),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: configObj.getDefaultElementWidth(context),
+                          child: ListTile(
+                              title: Text('${audiobook.title}:${item.title}',
+                                  maxLines: configObj.maxLines),
+                              leading: const CircleAvatar(
+                                // Display the Flutter Logo image asset.
+                                foregroundImage: AssetImage(
+                                    'assets/images/flutter_logo.png'),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AudiobookExpanded(audiobookPart: item),
+                                  ),
+                                );
+                              }),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.drag_handle)),
+                        IconButton(
+                            alignment: Alignment.centerRight,
+                            onPressed: () {},
+                            icon: const Icon(Icons.more_vert)),
+                      ],
+                    )),
+              );
             },
           ),
         ));

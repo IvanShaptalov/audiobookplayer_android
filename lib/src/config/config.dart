@@ -118,6 +118,10 @@ class LibraryConfig {
     return _maxLines;
   }
 
+  double getDefaultListHeight(context){
+    return MediaQuery.of(context).size.height * 0.6;
+  }
+
   double getDefaultRowHeight(context) {
     double currentHeight = MediaConfig.getmediaHeight(context) / 6;
     return MediaConfig.getNormalSize(
@@ -132,12 +136,17 @@ class LibraryConfig {
   static LibraryConfig get instance {
     return LibraryConfig();
   }
+
+  double getDefaultRowWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context);
+    return currentWidth;
+  }
 }
 
 
 class AudiobookExpConfig {
   double _minHeight = 0;
-  double _maxHeight = 1000;
+  double _maxHeight = 150;
 
   double _minElementWidth = 0;
   double _maxElementWidth = 500;
@@ -148,10 +157,17 @@ class AudiobookExpConfig {
     return _maxLines;
   }
 
+  double getDefaultListHeight(context){
+    return MediaQuery.of(context).size.height * 0.3;
+  }
+
   double getDefaultRowHeight(context) {
-    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
-    return MediaConfig.getNormalSize(
-        currentHeight, _minHeight, _maxHeight); //min _max size checks
+    double currentHeight = MediaConfig.getmediaHeight(context) / 10;
+    return currentHeight;//min _max size checks
+  }
+
+  double getEditColumnHeight(context) {
+    return MediaQuery.of(context).size.height / 10;
   }
 
   double getDefaultElementWidth(context) {
@@ -159,9 +175,16 @@ class AudiobookExpConfig {
     return MediaConfig.getNormalSize(currentWidth, _minElementWidth, _maxElementWidth);
   }
 
+  double getDefaultRowWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) * 0.6;
+    return currentWidth;
+  }
+
   static AudiobookExpConfig get instance {
     return AudiobookExpConfig();
   }
+
+
 }
 
 

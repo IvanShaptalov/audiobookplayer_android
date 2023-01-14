@@ -18,42 +18,59 @@ class AudiobookExpanded extends StatelessWidget {
       appBar: AppBar(
         title: Text('Audiobook Details'),
       ),
-      body: AudiobookPartsWidget(audiobook: audiobookPart.parent, configObj: LibraryConfig.instance),
-      // body: Column(children: [
-      //   Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       Text('${audiobookPart.parent.title}: ${audiobookPart.title}'),
-      //       Text('01 space')
-      //     ],
-      //   ),
-      //   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [Icon(Icons.image), Icon(Icons.star)]),
-      //   Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       Column(
-      //         children: [
-      //           Row(
-      //               mainAxisAlignment: MainAxisAlignment.start,
-      //               children: [Container(alignment: Alignment.centerLeft, child:Icon(Icons.equalizer)), Text('Equalizer')]),
-      //           Row(
-      //               mainAxisAlignment: MainAxisAlignment.start,
-      //               children: [Icon(Icons.timer), Text('Sleep Timer')]),
-      //           Row(
-      //               mainAxisAlignment: MainAxisAlignment.start,
-      //               children: [Icon(Icons.edit), Text('Edit')]),
-      //           Row(
-      //               mainAxisAlignment: MainAxisAlignment.start,
-      //               children: [Icon(Icons.share), Text('Share')]),
-      //         ],
-      //       ),
-      //       Column(
-      //         children: [AudiobookPartsWidget(audiobook: audiobookPart.parent, configObj: LibraryConfig.instance)],
-      //       )
-      //     ],
-      //   ),
-      //   Player()
-      // ]),
+      body:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('${audiobookPart.parent.title}: ${audiobookPart.title}'),
+            Text('01 space')
+          ],
+        ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Icon(Icons.image), Icon(Icons.star)]),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: MediaConfig.getmediaHeight(context) * 0.5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Container(
+                        alignment: Alignment.centerLeft,
+                        child: Icon(Icons.equalizer)),
+                    Text('Equalizer')
+                  ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Icon(Icons.timer), Text('Sleep Timer')]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Icon(Icons.edit), Text('Edit')]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Icon(Icons.share), Text('Share')]),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Container(
+                    height: MediaConfig.getmediaHeight(context) * 0.5,
+                    width:
+                        AudiobookExpConfig.instance.getDefaultRowWidth(context),
+                    child: AudiobookPartsWidget(
+                        audiobook: audiobookPart.parent,
+                        configObj: AudiobookExpConfig.instance))
+              ],
+            )
+          ],
+        ),
+        Player()
+      ]),
     );
   }
 }
