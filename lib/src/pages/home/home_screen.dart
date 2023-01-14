@@ -22,7 +22,7 @@ class AudiobookSource {
 
     AudiobookPlaylistItem theWitcherBloodOfElves =
         AudiobookPlaylistItem(1, 'The witcher, Blood of elves', null);
-    theWitcherLastWish.parts = [
+    theWitcherBloodOfElves.parts = [
       AudiobookItem(1, 'Part0', theWitcherBloodOfElves),
       AudiobookItem(2, 'Part1', theWitcherBloodOfElves),
       AudiobookItem(3, 'Part2', theWitcherBloodOfElves),
@@ -119,7 +119,7 @@ class SampleItemListView extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => AudiobookExpanded(
-                                          audiobook: item.parent),
+                                          audiobookPart: item),
                                     ),
                                   );
                                 })));

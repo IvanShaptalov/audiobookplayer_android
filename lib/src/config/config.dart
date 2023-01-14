@@ -21,6 +21,10 @@ class MediaConfig {
 
     return result;
   }
+
+  static MediaConfig get instance {
+    return MediaConfig();
+  }
 }
 
 class CurrentPlayingConfig {
@@ -40,6 +44,10 @@ class CurrentPlayingConfig {
   static double getDefaultRowWidth(context) {
     double currentWidth = MediaConfig.getmediaWidht(context) / 3;
     return MediaConfig.getNormalSize(currentWidth, _minWidth, _maxWidth);
+  }
+
+  static CurrentPlayingConfig get instance {
+    return CurrentPlayingConfig();
   }
 }
 
@@ -66,6 +74,10 @@ class RecentAudiobooksConfig {
     double currentWidth = MediaConfig.getmediaWidht(context) / 3;
     return MediaConfig.getNormalSize(currentWidth, _minWidth, _maxWidth);
   }
+
+  static RecentAudiobooksConfig get instance {
+    return RecentAudiobooksConfig();
+  }
 }
 
 
@@ -87,30 +99,68 @@ class LastAchievementsConfig {
     double currentWidth = MediaConfig.getmediaWidht(context) / 3;
     return MediaConfig.getNormalSize(currentWidth, _minWidth, _maxWidth);
   }
+
+  static LastAchievementsConfig get instance {
+    return LastAchievementsConfig();
+  }
 }
 
 class LibraryConfig {
-  static double _minHeight = 100;
-  static double _maxHeight = 150;
+  double _minHeight = 100;
+  double _maxHeight = 150;
 
-  static double _minElementWidth = 200;
-  static double _maxElementWidth = 500;
+  double _minElementWidth = 200;
+  double _maxElementWidth = 500;
 
-  static int _maxLines = 2;
+  int _maxLines = 2;
 
-  static int get maxLines {
+  int get maxLines {
     return _maxLines;
   }
 
-  static double getDefaultRowHeight(context) {
+  double getDefaultRowHeight(context) {
     double currentHeight = MediaConfig.getmediaHeight(context) / 6;
     return MediaConfig.getNormalSize(
         currentHeight, _minHeight, _maxHeight); //min _max size checks
   }
 
-  static double getDefaultElementWidth(context) {
+  double getDefaultElementWidth(context) {
     double currentWidth = MediaConfig.getmediaWidht(context) / 3;
     return MediaConfig.getNormalSize(currentWidth, _minElementWidth, _maxElementWidth);
+  }
+
+  static LibraryConfig get instance {
+    return LibraryConfig();
+  }
+}
+
+
+class AudiobookExpConfig {
+  double _minHeight = 0;
+  double _maxHeight = 1000;
+
+  double _minElementWidth = 0;
+  double _maxElementWidth = 500;
+
+  int _maxLines = 2;
+
+  int get maxLines {
+    return _maxLines;
+  }
+
+  double getDefaultRowHeight(context) {
+    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
+    return MediaConfig.getNormalSize(
+        currentHeight, _minHeight, _maxHeight); //min _max size checks
+  }
+
+  double getDefaultElementWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) / 3;
+    return MediaConfig.getNormalSize(currentWidth, _minElementWidth, _maxElementWidth);
+  }
+
+  static AudiobookExpConfig get instance {
+    return AudiobookExpConfig();
   }
 }
 
@@ -141,6 +191,10 @@ class SearchPageConfig {
 
   static MainAxisAlignment getRowAlignment() {
     return MainAxisAlignment.center;
+  }
+
+  static SearchPageConfig get instance {
+    return SearchPageConfig();
   }
 
 }

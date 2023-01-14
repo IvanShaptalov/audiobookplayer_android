@@ -40,10 +40,10 @@ class Library extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: LibraryConfig.getDefaultElementWidth(context),
+                        width: LibraryConfig.instance.getDefaultElementWidth(context),
                         child: ListTile(
                             title: Text('${item.title}',
-                                maxLines: LibraryConfig.maxLines),
+                                maxLines: LibraryConfig.instance.maxLines),
                             leading: const CircleAvatar(
                               // Display the Flutter Logo image asset.
                               foregroundImage:
