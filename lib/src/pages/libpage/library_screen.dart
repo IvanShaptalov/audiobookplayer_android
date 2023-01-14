@@ -1,49 +1,21 @@
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
+import 'package:audiobook_player/src/pages/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/config.dart';
 import '../sample_item.dart';
 
 class Library extends StatelessWidget {
-  const Library({
+  Library({
     super.key,
-    this.items = const [
-      AudiobookPlaylistItem(1, 'The witcher, Last Wish', true, [
-        SampleItem(1, 'Part 1'),
-        SampleItem(2, 'Part 2'),
-        SampleItem(3, 'Part 3'),
-        SampleItem(4, 'Part 4'),
-        SampleItem(5, 'Part 5'),
-        SampleItem(6, 'Part 6'),
-      ]),
-      AudiobookPlaylistItem(2, 'The whisperer in darkness', true, [
-        SampleItem(1, 'Part 1'),
-        SampleItem(2, 'Part 2'),
-        SampleItem(3, 'Part 3'),
-        SampleItem(4, 'Part 4'),
-        SampleItem(5, 'Part 5'),
-        SampleItem(6, 'Part 6'),
-      ]),
-      AudiobookPlaylistItem(3, 'Stupid book', false, [SampleItem(1, 'Part 1')]),
-      AudiobookPlaylistItem(3, 'Stupid book', false, [SampleItem(1, 'Part 1')]),
-      AudiobookPlaylistItem(3, 'Stupid book', false, [SampleItem(1, 'Part 1')]),
-      AudiobookPlaylistItem(3, 'Stupid book', false, [SampleItem(1, 'Part 1')]),
-      AudiobookPlaylistItem(3, 'Stupid book', false, [SampleItem(1, 'Part 1')]),
-      AudiobookPlaylistItem(3, 'Stupid book', false, [SampleItem(1, 'Part 1')]),
-      AudiobookPlaylistItem(3, 'Stupid book', false, [SampleItem(1, 'Part 1')]),
-      AudiobookPlaylistItem(4, 'The witcher, Blood of elves', true, [
-        SampleItem(1, 'Part 1'),
-        SampleItem(2, 'Part 2'),
-        SampleItem(3, 'Part 3'),
-        SampleItem(4, 'Part 4'),
-      ]),
-    ],
   });
 
-  final List<AudiobookPlaylistItem> items;
+  late List<AudiobookPlaylistItem> items;
 
   @override
   Widget build(BuildContext context) {
+    items = AudiobookSource.getAudiobooks;
+
     return Container(
         height: MediaQuery.of(context).size.height * 0.6,
         child: Scrollbar(
@@ -80,12 +52,12 @@ class Library extends StatelessWidget {
                             onTap: () {
                               print("clicked");
                               Navigator.push(
-                context,
-                MaterialPageRoute(
-                                builder: (context) => AudiobookParts(audiobook: item),
-                              ),
-              );
-                              
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AudiobookParts(audiobook: item),
+                                ),
+                              );
                             }),
                       ),
                       IconButton(

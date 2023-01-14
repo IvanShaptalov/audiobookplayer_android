@@ -1,15 +1,24 @@
-/// A placeholder class that represents an entity or model.
-class SampleItem {
-  const SampleItem(this.id, this.title);
-  final String title;
-  final int id;
+class AudiobookItem {
+  AudiobookItem(this.id, this.title, this.parent);
+  String title;
+  int id;
+  AudiobookPlaylistItem parent;
 }
 
 
 class AudiobookPlaylistItem {
-  const AudiobookPlaylistItem(this.id, this.title, this.hasParts, this.parts);
-  final int id;
-  final String title;
-  final bool hasParts;
-  final List<SampleItem> parts;
+  AudiobookPlaylistItem(this.id, this.title, this.parts);
+
+  int id;
+  String title;
+  bool get hasParts {
+    if (parts == null){
+      return false;
+    }
+    else{
+      return parts!.isNotEmpty; //check that audiobook has parts
+
+    }
+  }
+  List<AudiobookItem>? parts;
 }
