@@ -38,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Text('email'),
             Container(
-                height: MediaQuery.of(context).size.height / 6,
+                height: MediaQuery.of(context).size.height / 8,
                 width: MediaQuery.of(context).size.width / 2,
                 child: Form(
                     key: this._emailKey,
@@ -73,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Text('login'),
             Container(
-                height: MediaQuery.of(context).size.height / 6,
+                height: MediaQuery.of(context).size.height / 8,
                 width: MediaQuery.of(context).size.width / 2,
                 child: Form(
                     key: this._loginKey,
@@ -108,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Text('password'),
             Container(
-                height: MediaQuery.of(context).size.height / 6,
+                height: MediaQuery.of(context).size.height / 8,
                 width: MediaQuery.of(context).size.width / 2,
                 child: Form(
                     key: this._passKey,
@@ -137,6 +137,18 @@ class ProfileScreen extends StatelessWidget {
                             }
                           })
                     ]))),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              child: TextButton(onPressed: () {}, child: Text('Log out')),
+              height: MediaConfig.getmediaHeight(context) / 12,
+              width: MediaConfig.getmediaWidht(context) / 2,
+              color: Colors.red,
+              
+            ),
           ],
         ),
         Player()
