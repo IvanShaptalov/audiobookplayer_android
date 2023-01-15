@@ -1,6 +1,7 @@
 import 'package:audiobook_player/src/pages/home/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/libpage/library_screen.dart';
+import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
 import 'package:audiobook_player/src/pages/search_page/search_page.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class _MyApp extends State {
               // Navigate to the settings page. If the user leaves and returns
               // to the app after it has been killed while running in the
               // background, the navigation stack is restored.
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
+              Navigator.restorablePushNamed(context, ProfileScreen.routeName);
             },
           ),
           title: Text(_pageTitles.elementAt(_currentPage)),

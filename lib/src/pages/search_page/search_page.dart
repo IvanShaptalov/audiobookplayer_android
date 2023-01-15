@@ -24,7 +24,7 @@ class SearchPage extends StatelessWidget {
                 key: this._formKey,
                 child: Column(children: [
                   TextFormField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.url,
                       validator: (String? inValue) {
                         if (inValue?.length == 0) {
                           return "Enter valid link please";

@@ -1,4 +1,5 @@
 import 'package:audiobook_player/src/config/config.dart';
+import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'sample_item_details_view.dart';
@@ -27,7 +28,7 @@ class LastAchievement extends StatelessWidget {
                 // background, the navigation stack is restored.
                 Navigator.restorablePushNamed(
                   context,
-                  SampleItemDetailsView.routeName,
+                  ProfileScreen.routeName,
                 );
               }),
         ));

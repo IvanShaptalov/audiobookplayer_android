@@ -1,5 +1,6 @@
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
+import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -72,7 +73,8 @@ class MyApp extends StatelessWidget {
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
                     return SampleItemDetailsView();
-                  // case SampleItemListView.routeName:
+                  case ProfileScreen.routeName:
+                    return ProfileScreen();
                   default:
                     return HomePage();
                 }
