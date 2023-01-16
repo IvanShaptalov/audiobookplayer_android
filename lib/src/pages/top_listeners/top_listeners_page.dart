@@ -3,21 +3,20 @@ import 'package:audiobook_player/src/pages/home/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/libpage/library_screen.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
-import 'package:audiobook_player/src/pages/top_listeners/top_listeners_page.dart';
 import 'package:flutter/material.dart';
 
-class AchievementsList extends StatelessWidget {
-  static const String routeName = '/achievement_list';
+class TopListeners extends StatelessWidget {
+  static const String routeName = '/top_listeners';
   Color setLvlColor(int lvl) {
     switch (lvl) {
       case 1:
-        return Color.fromARGB(57, 122, 205, 130);
+        return Color.fromARGB(57, 199, 120, 23);
       case 2:
-        return Color.fromARGB(57, 49, 76, 197);
+        return Color.fromARGB(57, 20, 4, 239);
       case 3:
-        return Color.fromARGB(57, 190, 33, 193);
+        return Color.fromARGB(57, 27, 15, 208);
       default:
-        return Color.fromARGB(57, 122, 205, 130);
+        return Color.fromARGB(57, 255, 255, 255);
     }
   }
 
@@ -79,12 +78,33 @@ class AchievementsList extends StatelessWidget {
                     },
                   ),
                 )),
-            TextButton(onPressed: () {
-              Navigator.restorablePushNamed(context, TopListeners.routeName);
-            }, child: Text('Top Listeners')),
+            Container(
+                margin: EdgeInsets.only(
+                    top: 20,
+                    right: MediaConfig.getmediaWidht(context) / 25,
+                    left: MediaConfig.getmediaWidht(context) / 25),
+                color: setLvlColor(1),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: LibraryConfig.instance
+                          .getDefaultElementWidth(context),
+                      child: ListTile(
+                          title: Text('your position',
+                              maxLines: LibraryConfig.instance.maxLines),
+                          leading: const CircleAvatar(
+                            // Display the Flutter Logo image asset.
+                            foregroundImage:
+                                AssetImage('assets/images/flutter_logo.png'),
+                          ),
+                          onTap: () {}),
+                    ),
+                    Text('# 1'),
+                  ],
+                )),
             Player(),
           ],
-          
         ));
   }
 }
