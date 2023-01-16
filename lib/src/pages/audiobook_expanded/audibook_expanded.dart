@@ -1,5 +1,6 @@
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
+import 'package:audiobook_player/src/pages/edit_page/edit_page.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:flutter/material.dart';
 
@@ -47,9 +48,21 @@ class AudiobookExpanded extends StatelessWidget {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [Icon(Icons.timer), Text('Sleep Timer')]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Icon(Icons.edit), Text('Edit')]),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                EditPage(audiobookPart: audiobookPart),
+                          ),
+                        );
+                      },
+                    ),
+                    const Text('Edit')
+                  ]),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [Icon(Icons.share), Text('Share')]),

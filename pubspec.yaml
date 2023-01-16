@@ -15,6 +15,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   audioplayers: ^0.20.1
+  file_picker: ^5.2.5
 
 
 dev_dependencies:
