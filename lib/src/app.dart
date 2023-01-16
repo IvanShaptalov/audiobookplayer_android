@@ -1,3 +1,4 @@
+import 'package:audiobook_player/src/pages/achievements/achievements_list.dart';
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
 import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
@@ -75,6 +76,8 @@ class MyApp extends StatelessWidget {
                     return SampleItemDetailsView();
                   case ProfileScreen.routeName:
                     return ProfileScreen();
+                  case AchievementsList.routeName:
+                    return AchievementsList();
                   default:
                     return HomePage();
                 }

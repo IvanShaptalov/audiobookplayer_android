@@ -22,3 +22,14 @@ class AudiobookPlaylistItem {
   }
   List<AudiobookItem>? parts;
 }
+
+class Achievement {
+  Achievement(this.id, this.title, this.description, this.done, this.lvl);
+
+  int id;
+  String title;
+  String description;
+  bool done;
+  int lvl;
+
+}
