@@ -2,6 +2,7 @@ import 'package:audiobook_player/src/pages/achievements/achievements_list.dart';
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
 import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
+import 'package:audiobook_player/src/pages/statistics/statistics.dart';
 import 'package:audiobook_player/src/pages/top_listeners/top_listeners_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -81,6 +82,8 @@ class MyApp extends StatelessWidget {
                     return AchievementsList();
                   case TopListeners.routeName:
                     return TopListeners();
+                  case Statistics.routeName:
+                    return Statistics();
                   default:
                     return HomePage();
                 }

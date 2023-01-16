@@ -1,5 +1,6 @@
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
+import 'package:audiobook_player/src/pages/statistics/statistics.dart';
 import 'package:flutter/material.dart';
 
 class Email {
@@ -31,7 +32,9 @@ class ProfileScreen extends StatelessWidget {
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Container(
           height: MediaConfig.getmediaHeight(context) / 6,
-          child: Text('stats'),
+          child: TextButton(onPressed: (){
+            Navigator.restorablePushNamed(context, Statistics.routeName);
+          },child: Text('stats')),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
