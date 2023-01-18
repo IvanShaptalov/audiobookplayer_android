@@ -1,4 +1,4 @@
-import 'package:audiobook_player/src/pages/home/home_screen.dart';
+import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/libpage/library_screen.dart';
 import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _MyApp extends State {
   var _currentPage = 1;
-  final List<Widget> _pages = [SearchPage(), SampleItemListView(), Library()];
+  final List<Widget> _pages = [SearchPage(), HomeScreen(), Library()];
   final List<String> _pageTitles = ['Search Page', 'Home Page', 'Library Page'];
   @override
   Widget build(BuildContext context) {
