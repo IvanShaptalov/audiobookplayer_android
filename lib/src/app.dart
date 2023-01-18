@@ -1,4 +1,4 @@
-import 'package:audiobook_player/src/pages/achievements/achievements_list.dart';
+import 'package:audiobook_player/src/pages/achievements/achievements_screen.dart';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
 import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
 import 'package:audiobook_player/src/pages/statistics/statistics.dart';
