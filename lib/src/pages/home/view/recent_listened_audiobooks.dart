@@ -1,8 +1,38 @@
-import 'package:audiobook_player/src/config/config.dart';
+import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 import 'package:audiobook_player/src/pages/audiobook_expanded/audibook_expanded.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
+import 'package:audiobook_player/src/pages/libpage/library_screen.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
+
+class RecentAudiobooksConfig {
+  static double _minHeight = 100;
+  static double _maxHeight = 101;
+
+  static double _minWidth = 170;
+  static double _maxWidth = 200;
+
+  static int _maxLines = 1;
+
+  static int get maxLines {
+    return _maxLines;
+  }
+
+  static double getDefaultRowHeight(context) {
+    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
+    return MediaConfig.getNormalSize(
+        currentHeight, _minHeight, _maxHeight); //min _max size checks
+  }
+
+  static double getDefaultElementWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) / 3;
+    return MediaConfig.getNormalSize(currentWidth, _minWidth, _maxWidth);
+  }
+
+  static LibraryConfig get instance {
+    return LibraryConfig();
+  }
+}
 
 class RecentListenedAudiobooks extends StatelessWidget {
   late AudiobookPlaylistItem playlist;

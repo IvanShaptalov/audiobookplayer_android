@@ -1,7 +1,41 @@
-import 'package:audiobook_player/src/config/config.dart';
+import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 import 'package:flutter/material.dart';
 
-import '../sample_item.dart';
+import '../../sample_item.dart';
+
+class SearchPageConfig {
+  static double _minHeight = 100;
+  static double _maxHeight = 150;
+
+  static double _minElementWidth = 200;
+  static double _maxElementWidth = 500;
+
+  static int _maxLines = 2;
+
+  static int get maxLines {
+    return _maxLines;
+  }
+
+  static double getDefaultRowHeight(context) {
+    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
+    return MediaConfig.getNormalSize(
+        currentHeight, _minHeight, _maxHeight); //min _max size checks
+  }
+
+  static double getDefaultElementWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) / 3;
+    return MediaConfig.getNormalSize(
+        currentWidth, _minElementWidth, _maxElementWidth);
+  }
+
+  static MainAxisAlignment getRowAlignment() {
+    return MainAxisAlignment.center;
+  }
+
+  static SearchPageConfig get instance {
+    return SearchPageConfig();
+  }
+}
 
 class LoginData {
   String username = "";
@@ -71,7 +105,6 @@ class SearchPage extends StatelessWidget {
           mainAxisAlignment: SearchPageConfig.getRowAlignment(),
           children: [
             Text('select folder'),
-           
             Text('use default folder'),
           ],
         ),

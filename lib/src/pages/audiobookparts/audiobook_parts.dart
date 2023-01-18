@@ -1,8 +1,50 @@
+import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 
-import '../../config/config.dart';
 import '../audiobook_expanded/audibook_expanded.dart';
+
+class AudiobooksPartsConfig {
+  double _minHeight = 100;
+  double _maxHeight = 101;
+
+  double _minWidth = 170;
+  double _maxWidth = 200;
+
+  int _maxLines = 2;
+
+  double _minElementWidth = 200;
+  double _maxElementWidth = 500;
+
+  int get maxLines {
+    return _maxLines;
+  }
+
+  double getDefaultRowWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) * 0.6;
+    return currentWidth;
+  }
+
+  double getDefaultElementWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) / 3;
+    return MediaConfig.getNormalSize(
+        currentWidth, _minElementWidth, _maxElementWidth);
+  }
+
+  double getDefaultListHeight(context){
+    return MediaQuery.of(context).size.height * 0.3;
+  }
+
+  double getDefaultRowHeight(context) {
+    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
+    return MediaConfig.getNormalSize(
+        currentHeight, _minHeight, _maxHeight); //min _max size checks
+  }
+
+  static AudiobooksPartsConfig get instance {
+    return AudiobooksPartsConfig();
+  }
+}
 
 class AudiobookParts extends StatelessWidget {
   AudiobookParts({super.key, required this.audiobook});
@@ -20,7 +62,8 @@ class AudiobookParts extends StatelessWidget {
         ),
         body: Container(
             child: AudiobookPartsWidget(
-                audiobook: audiobook, configObj: LibraryConfig.instance)));
+                audiobook: audiobook,
+                configObj: AudiobooksPartsConfig.instance)));
   }
 }
 

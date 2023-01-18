@@ -5,6 +5,48 @@ import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:audiobook_player/src/pages/top_listeners/top_listeners_page.dart';
 import 'package:flutter/material.dart';
 
+
+
+class AchievementsConfig {
+  double _minHeight = 100;
+  double _maxHeight = 101;
+
+  double _minWidth = 170;
+  double _maxWidth = 200;
+
+  int _maxLines = 2;
+
+  double _minElementWidth = 200;
+  double _maxElementWidth = 500;
+
+  int get maxLines {
+    return _maxLines;
+  }
+
+  double getDefaultElementWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) / 3;
+    return MediaConfig.getNormalSize(
+        currentWidth, _minElementWidth, _maxElementWidth);
+  }
+
+  double getDefaultRowHeight(context) {
+    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
+    return MediaConfig.getNormalSize(
+        currentHeight, _minHeight, _maxHeight); //min _max size checks
+  }
+
+  double getDefaultRowWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context);
+    return currentWidth;
+  }
+
+  static AchievementsConfig get instance {
+    return AchievementsConfig();
+  }
+}
+
+
+
 class AchievementsList extends StatelessWidget {
   static const String routeName = '/achievement_list';
   Color setLvlColor(int lvl) {
@@ -47,23 +89,22 @@ class AchievementsList extends StatelessWidget {
                       return Container(
                         margin: EdgeInsets.only(
                             right: 20.0, top: 20.0, bottom: 20.0),
-                        width: LibraryConfig.instance
+                        width: AchievementsConfig.instance
                             .getDefaultElementWidth(context),
                         color: setLvlColor(item.lvl),
                         // ignore: prefer_const_constructors
                         child: Container(
-                            width: LibraryConfig.instance
-                                .getDefaultRowWidth(context),
+                            width: AchievementsConfig.instance.getDefaultRowWidth(context),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  width: LibraryConfig.instance
+                                  width: AchievementsConfig.instance
                                       .getDefaultElementWidth(context),
                                   child: ListTile(
                                       title: Text('${item.title}',
                                           maxLines:
-                                              LibraryConfig.instance.maxLines),
+                                              AchievementsConfig.instance.maxLines),
                                       leading: const CircleAvatar(
                                         // Display the Flutter Logo image asset.
                                         foregroundImage: AssetImage(

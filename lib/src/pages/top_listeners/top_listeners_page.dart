@@ -1,11 +1,49 @@
 import 'package:audiobook_player/src/config/config.dart';
-import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
-import 'package:audiobook_player/src/pages/libpage/library_screen.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:audiobook_player/src/pages/home/view/source.dart';
+
+class TopListenersConfig {
+  double _minHeight = 100;
+  double _maxHeight = 101;
+
+  double _minWidth = 170;
+  double _maxWidth = 200;
+
+  int _maxLines = 2;
+
+  double _minElementWidth = 200;
+  double _maxElementWidth = 500;
+
+  int get maxLines {
+    return _maxLines;
+  }
+
+  double getDefaultElementWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context) / 3;
+    return MediaConfig.getNormalSize(
+        currentWidth, _minElementWidth, _maxElementWidth);
+  }
+
+  double getDefaultRowHeight(context) {
+    double currentHeight = MediaConfig.getmediaHeight(context) / 6;
+    return MediaConfig.getNormalSize(
+        currentHeight, _minHeight, _maxHeight); //min _max size checks
+  }
+
+  double getDefaultRowWidth(context) {
+    double currentWidth = MediaConfig.getmediaWidht(context);
+    return currentWidth;
+  }
+
+  static TopListenersConfig get instance {
+    return TopListenersConfig();
+  }
+}
+
+
 
 class TopListeners extends StatelessWidget {
   static const String routeName = '/top_listeners';
@@ -49,23 +87,23 @@ class TopListeners extends StatelessWidget {
                       return Container(
                         margin: EdgeInsets.only(
                             right: 20.0, top: 20.0, bottom: 20.0),
-                        width: LibraryConfig.instance
+                        width: TopListenersConfig.instance
                             .getDefaultElementWidth(context),
                         color: setLvlColor(item.lvl),
                         // ignore: prefer_const_constructors
                         child: Container(
-                            width: LibraryConfig.instance
+                            width: TopListenersConfig.instance
                                 .getDefaultRowWidth(context),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  width: LibraryConfig.instance
+                                  width: TopListenersConfig.instance
                                       .getDefaultElementWidth(context),
                                   child: ListTile(
                                       title: Text('${item.title}',
                                           maxLines:
-                                              LibraryConfig.instance.maxLines),
+                                              TopListenersConfig.instance.maxLines),
                                       leading: const CircleAvatar(
                                         // Display the Flutter Logo image asset.
                                         foregroundImage: AssetImage(
@@ -90,11 +128,11 @@ class TopListeners extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: LibraryConfig.instance
+                      width: TopListenersConfig.instance
                           .getDefaultElementWidth(context),
                       child: ListTile(
                           title: Text('your position',
-                              maxLines: LibraryConfig.instance.maxLines),
+                              maxLines: TopListenersConfig.instance.maxLines),
                           leading: const CircleAvatar(
                             // Display the Flutter Logo image asset.
                             foregroundImage:
