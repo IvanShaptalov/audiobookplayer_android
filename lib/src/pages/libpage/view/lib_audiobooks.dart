@@ -9,8 +9,6 @@ class LibAudiobooks extends StatelessWidget {
 
   const LibAudiobooks({super.key, required this.items});
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
@@ -27,18 +25,19 @@ class LibAudiobooks extends StatelessWidget {
           final item = items[index];
 
           return Container(
-              margin: EdgeInsets.only(right: 20.0, top: 20.0, bottom: 20.0),
+              margin:
+                  const EdgeInsets.only(right: 20.0, top: 20.0, bottom: 20.0),
               width: LibraryConfig.instance.getDefaultElementWidth(context),
               color: const Color.fromARGB(57, 122, 205, 130),
               // ignore: prefer_const_constructors
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     width:
                         LibraryConfig.instance.getDefaultElementWidth(context),
                     child: ListTile(
-                        title: Text('${item.title}',
+                        title: Text(item.title,
                             maxLines: LibraryConfig.instance.maxLines),
                         leading: const CircleAvatar(
                           // Display the Flutter Logo image asset.
@@ -46,7 +45,6 @@ class LibAudiobooks extends StatelessWidget {
                               AssetImage('assets/images/flutter_logo.png'),
                         ),
                         onTap: () {
-                          print("clicked");
                           Navigator.push(
                             context,
                             MaterialPageRoute(

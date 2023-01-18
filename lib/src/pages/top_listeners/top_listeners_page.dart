@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
@@ -6,16 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 
 class TopListenersConfig {
-  double _minHeight = 100;
-  double _maxHeight = 101;
+  final double _minHeight = 100;
+  final double _maxHeight = 101;
 
-  double _minWidth = 170;
-  double _maxWidth = 200;
 
-  int _maxLines = 2;
+  final int _maxLines = 2;
 
-  double _minElementWidth = 200;
-  double _maxElementWidth = 500;
+  final double _minElementWidth = 200;
+  final double _maxElementWidth = 500;
 
   int get maxLines {
     return _maxLines;
@@ -47,16 +47,18 @@ class TopListenersConfig {
 
 class TopListeners extends StatelessWidget {
   static const String routeName = '/top_listeners';
+
+  TopListeners({super.key});
   Color setLvlColor(int lvl) {
     switch (lvl) {
       case 1:
-        return Color.fromARGB(57, 199, 120, 23);
+        return const Color.fromARGB(57, 199, 120, 23);
       case 2:
-        return Color.fromARGB(57, 20, 4, 239);
+        return const Color.fromARGB(57, 20, 4, 239);
       case 3:
-        return Color.fromARGB(57, 27, 15, 208);
+        return const Color.fromARGB(57, 27, 15, 208);
       default:
-        return Color.fromARGB(57, 255, 255, 255);
+        return const Color.fromARGB(57, 255, 255, 255);
     }
   }
 
@@ -65,11 +67,11 @@ class TopListeners extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Audiobook by parts'),
+          title: const Text('Audiobook by parts'),
         ),
         body: Column(
           children: [
-            Container(
+            SizedBox(
                 height: MediaConfig.getmediaHeight(context) * 0.7,
                 child: Scrollbar(
                   scrollbarOrientation: ScrollbarOrientation.right,
@@ -85,23 +87,23 @@ class TopListeners extends StatelessWidget {
                       final item = items[index];
 
                       return Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             right: 20.0, top: 20.0, bottom: 20.0),
                         width: TopListenersConfig.instance
                             .getDefaultElementWidth(context),
                         color: setLvlColor(item.lvl),
                         // ignore: prefer_const_constructors
-                        child: Container(
+                        child: SizedBox(
                             width: TopListenersConfig.instance
                                 .getDefaultRowWidth(context),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
+                                SizedBox(
                                   width: TopListenersConfig.instance
                                       .getDefaultElementWidth(context),
                                   child: ListTile(
-                                      title: Text('${item.title}',
+                                      title: Text(item.title,
                                           maxLines:
                                               TopListenersConfig.instance.maxLines),
                                       leading: const CircleAvatar(
@@ -111,7 +113,7 @@ class TopListeners extends StatelessWidget {
                                       ),
                                       onTap: () {}),
                                 ),
-                                Text('${item.description}'),
+                                Text(item.description),
                               ],
                             )),
                       );
@@ -127,7 +129,7 @@ class TopListeners extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    SizedBox(
                       width: TopListenersConfig.instance
                           .getDefaultElementWidth(context),
                       child: ListTile(
@@ -140,7 +142,7 @@ class TopListeners extends StatelessWidget {
                           ),
                           onTap: () {}),
                     ),
-                    Text('# 1'),
+                    const Text('# 1'),
                   ],
                 )),
             Player(),

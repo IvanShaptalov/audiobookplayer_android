@@ -5,16 +5,14 @@ import 'package:flutter/material.dart';
 import '../audiobook_expanded/view/audibook_expanded_screen.dart';
 
 class AudiobooksPartsConfig {
-  double _minHeight = 100;
-  double _maxHeight = 101;
+  final double _minHeight = 100;
+  final double _maxHeight = 101;
 
-  double _minWidth = 170;
-  double _maxWidth = 200;
 
-  int _maxLines = 2;
+  final int _maxLines = 2;
 
-  double _minElementWidth = 200;
-  double _maxElementWidth = 500;
+  final double _minElementWidth = 200;
+  final double _maxElementWidth = 500;
 
   int get maxLines {
     return _maxLines;
@@ -47,7 +45,7 @@ class AudiobooksPartsConfig {
 }
 
 class AudiobookParts extends StatelessWidget {
-  AudiobookParts({super.key, required this.audiobook});
+  const AudiobookParts({super.key, required this.audiobook});
 
   final AudiobookPlaylistItem audiobook;
 
@@ -55,18 +53,17 @@ class AudiobookParts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic items = audiobook.parts;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Audiobook by parts'),
+          title: const Text('Audiobook by parts'),
         ),
-        body: Container(
-            child: AudiobookPartsWidget(
-                audiobook: audiobook,
-                configObj: AudiobooksPartsConfig.instance)));
+        body: AudiobookPartsWidget(
+            audiobook: audiobook,
+            configObj: AudiobooksPartsConfig.instance));
   }
 }
 
+// ignore: must_be_immutable
 class AudiobookPartsWidget extends StatelessWidget {
   AudiobookPartsWidget(
       {super.key, required this.audiobook, required this.configObj});
@@ -77,7 +74,7 @@ class AudiobookPartsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic items = audiobook.parts;
 
-    return Container(
+    return SizedBox(
         height: configObj.getDefaultListHeight(context),
         child: Scrollbar(
           scrollbarOrientation: ScrollbarOrientation.right,
@@ -93,16 +90,16 @@ class AudiobookPartsWidget extends StatelessWidget {
               final item = items[index];
 
               return Container(
-                margin: EdgeInsets.only(right: 20.0, top: 20.0, bottom: 20.0),
+                margin: const EdgeInsets.only(right: 20.0, top: 20.0, bottom: 20.0),
                 width: configObj.getDefaultElementWidth(context),
                 color: const Color.fromARGB(57, 122, 205, 130),
                 // ignore: prefer_const_constructors
-                child: Container(
+                child: SizedBox(
                     width: configObj.getDefaultRowWidth(context),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: configObj.getDefaultElementWidth(context),
                           child: ListTile(
                               title: Text('${audiobook.title}:${item.title}',

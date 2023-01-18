@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 
 class CurrentPlayingConfig {
-  static double _minHeight = 75;
-  static double _maxHeight = 76;
+  static const double _minHeight = 75;
+  static const double _maxHeight = 76;
 
 
-  static double _minWidth = 75;
-  static double _maxWidth = 200;
+  static const double _minWidth = 75;
+  static const double _maxWidth = 200;
 
   static double getDefaultRowHeight(context) {
     double currentHeight = MediaConfig.getmediaHeight(context) / 6;
@@ -28,16 +28,17 @@ class CurrentPlayingConfig {
 
 
 class CurrentPlayingBook extends StatelessWidget {
+  const CurrentPlayingBook({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(child:  Align(
+    return Align(
         alignment: Alignment.centerRight,
         child: Container(
           height: CurrentPlayingConfig.getDefaultRowHeight(context),
           width: CurrentPlayingConfig.getDefaultRowWidth(context),
-          child: Text('new row'),
           color: Colors.amber,
-        )
+          child: const Text('new row'),
         )
         );
   }

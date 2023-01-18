@@ -4,20 +4,16 @@ import 'package:audiobook_player/src/pages/achievements/view/top_listeners_link.
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
-import 'package:audiobook_player/src/pages/top_listeners/top_listeners_page.dart';
 import 'package:flutter/material.dart';
 
 class AchievementsConfig {
-  double _minHeight = 100;
-  double _maxHeight = 101;
+  final double _minHeight = 100;
+  final double _maxHeight = 101;
 
-  double _minWidth = 170;
-  double _maxWidth = 200;
+  final int _maxLines = 2;
 
-  int _maxLines = 2;
-
-  double _minElementWidth = 200;
-  double _maxElementWidth = 500;
+  final double _minElementWidth = 200;
+  final double _maxElementWidth = 500;
 
   int get maxLines {
     return _maxLines;
@@ -45,20 +41,23 @@ class AchievementsConfig {
   }
 }
 
+// ignore: must_be_immutable
 class AchievementsList extends StatelessWidget {
   static const String routeName = '/achievement_list';
 
   List<Achievement> items = AchievementSource.getAchievements;
+
+  AchievementsList({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Achievements'),
+          title: const Text('Achievements'),
         ),
         body: Column(
           children: [
             AchievementsWidget(items: items),
-            TopListenersLink(),
+            const TopListenersLink(),
             Player(),
           ],
         ));

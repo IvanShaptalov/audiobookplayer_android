@@ -43,13 +43,13 @@ class SettingsView extends StatelessWidget {
             ],
           ),
           TextButton(
-              onPressed: () {print('pressed');},
+              onPressed: () {},
               child: Row(
-                  children: [Icon(Icons.folder), Text('audiobook folders')])),
+                  children: const [Icon(Icons.folder), Text('audiobook folders')])),
           DropdownButton<ThemeMode>(
             // Read the selected themeMode from the controller
             value: controller.themeMode,
-            icon: Icon(Icons.language),
+            icon: const Icon(Icons.language),
             // Call the updateThemeMode method any time the user selects a theme.
             onChanged: controller.updateThemeMode,
             items: const [

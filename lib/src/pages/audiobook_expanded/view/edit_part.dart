@@ -3,7 +3,7 @@ import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 
 class EditPart extends StatelessWidget {
-  EditPart({super.key, required this.audiobookPart});
+  const EditPart({super.key, required this.audiobookPart});
 
   final AudiobookItem audiobookPart;
 

@@ -1,16 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 import 'package:flutter/material.dart';
 
-import '../../sample_item.dart';
 
 class SearchPageConfig {
-  static double _minHeight = 100;
-  static double _maxHeight = 150;
+  static const double _minHeight = 100;
+  static const double _maxHeight = 150;
 
-  static double _minElementWidth = 200;
-  static double _maxElementWidth = 500;
+  static const double _minElementWidth = 200;
+  static const double _maxElementWidth = 500;
 
-  static int _maxLines = 2;
+  static const int _maxLines = 2;
 
   static int get maxLines {
     return _maxLines;
@@ -43,8 +44,10 @@ class LoginData {
 }
 
 class SearchPage extends StatelessWidget {
-  LoginData _loginData = new LoginData();
-  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final LoginData _loginData = LoginData();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,34 +56,34 @@ class SearchPage extends StatelessWidget {
         Container(
             height: MediaQuery.of(context).size.height / 3,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(top: 50.0, right: 50.0, left: 50.0),
+            padding: const EdgeInsets.only(top: 50.0, right: 50.0, left: 50.0),
             child: Form(
-                key: this._formKey,
+                key: _formKey,
                 child: Column(children: [
                   TextFormField(
                       keyboardType: TextInputType.url,
                       validator: (String? inValue) {
-                        if (inValue?.length == 0) {
+                        if (inValue!.isEmpty) {
                           return "Enter valid link please";
                         }
                         return null;
                       },
                       onSaved: (inValue) {
-                        this._loginData.username = inValue!;
+                        _loginData.username = inValue!;
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: "enter link",
                           labelText: "Enter youtube audiobook link")),
                   TextButton(
-                      child: Row(children: [Icon(Icons.search), Text("Find")]),
+                      child: Row(children: const [Icon(Icons.search), Text("Find")]),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState?.save();
-                          print("Link: ${_loginData.username}");
+                          // print("Link: ${_loginData.username}");
                         }
                       })
                 ]))),
-        Container(
+        SizedBox(
             width: MediaQuery.of(context).size.width * 0.75,
             child: const LinearProgressIndicator(
               value: 0.25,
@@ -91,8 +94,8 @@ class SearchPage extends StatelessWidget {
         Container(
             margin: EdgeInsets.only(
                 bottom: MediaQuery.of(context).size.height / 16),
-            child: Text('downloading')),
-        Container(
+            child: const Text('downloading')),
+        SizedBox(
             width: MediaQuery.of(context).size.width * 0.75,
             child: const LinearProgressIndicator(
               value: 0.25,
@@ -100,10 +103,10 @@ class SearchPage extends StatelessWidget {
               color: Color.fromARGB(255, 43, 104, 234),
               semanticsLabel: "downloading",
             )),
-        Text('converting'),
+        const Text('converting'),
         Row(
           mainAxisAlignment: SearchPageConfig.getRowAlignment(),
-          children: [
+          children: const [
             Text('select folder'),
             Text('use default folder'),
           ],

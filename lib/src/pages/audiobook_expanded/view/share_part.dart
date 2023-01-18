@@ -1,11 +1,8 @@
-import 'package:audiobook_player/src/config/config.dart';
-import 'package:audiobook_player/src/pages/audiobook_expanded/view/audibook_expanded_screen.dart';
-import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 
 class SharePart extends StatelessWidget {
-  SharePart({super.key, required this.audiobookPart});
+  const SharePart({super.key, required this.audiobookPart});
 
   final AudiobookItem audiobookPart;
 
@@ -13,6 +10,7 @@ class SharePart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [Icon(Icons.share), Text('Share')]);
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [const Icon(Icons.share), const Text('Share')]);
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/libpage/view/library_screen.dart';
@@ -8,14 +10,14 @@ import 'package:flutter/material.dart';
 import '../../settings/settings_view.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
   @override
   _MyApp createState() => _MyApp();
 }
 
 class _MyApp extends State {
   var _currentPage = 1;
-  final List<Widget> _pages = [SearchPage(), HomeScreen(), Library()];
+  final List<Widget> _pages = [SearchPage(), const HomeScreen(), Library()];
   final List<String> _pageTitles = ['Search Page', 'Home Page', 'Library Page'];
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class _MyApp extends State {
           children: [_pages.elementAt(_currentPage), Player()],
         ),
         bottomNavigationBar: BottomNavigationBar(
-            items: [
+            items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.search), label: "Search"),
               BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),

@@ -1,21 +1,20 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
-import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:audiobook_player/src/pages/libpage/view/lib_audiobooks.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 
 class LibraryConfig {
-  double _minHeight = 100;
-  double _maxHeight = 101;
+  final double _minHeight = 100;
+  final double _maxHeight = 101;
 
-  double _minWidth = 170;
-  double _maxWidth = 200;
 
-  int _maxLines = 2;
+  final int _maxLines = 2;
 
-  double _minElementWidth = 200;
-  double _maxElementWidth = 500;
+  final double _minElementWidth = 200;
+  final double _maxElementWidth = 500;
 
   int get maxLines {
     return _maxLines;
@@ -49,7 +48,7 @@ class Library extends StatelessWidget {
   Widget build(BuildContext context) {
     items = AudiobookSource.getAudiobooks;
 
-    return Container(
+    return SizedBox(
         height: MediaQuery.of(context).size.height * 0.6,
         child: LibAudiobooks(items: items));
   }

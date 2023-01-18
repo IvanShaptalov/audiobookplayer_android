@@ -5,7 +5,7 @@ import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 class AudiobookOtherParts extends StatelessWidget {
 
-  AudiobookOtherParts({super.key, required this.audiobookPart});
+  const AudiobookOtherParts({super.key, required this.audiobookPart});
 
   final AudiobookItem audiobookPart;
   
@@ -13,7 +13,7 @@ class AudiobookOtherParts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
               children: [
-                Container(
+                SizedBox(
                     height: MediaConfig.getmediaHeight(context) * 0.5,
                     width:
                         AudiobookExpConfig.instance.getDefaultRowWidth(context),

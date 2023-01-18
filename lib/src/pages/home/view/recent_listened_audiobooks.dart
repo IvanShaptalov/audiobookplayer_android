@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/audibook_expanded_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
@@ -6,13 +8,13 @@ import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 
 class RecentAudiobooksConfig {
-  static double _minHeight = 100;
-  static double _maxHeight = 101;
+  static const double _minHeight = 100;
+  static const double _maxHeight = 101;
 
-  static double _minWidth = 170;
-  static double _maxWidth = 200;
+  static const double _minWidth = 170;
+  static const double _maxWidth = 200;
 
-  static int _maxLines = 1;
+  static const int _maxLines = 1;
 
   static int get maxLines {
     return _maxLines;
@@ -37,12 +39,14 @@ class RecentAudiobooksConfig {
 class RecentListenedAudiobooks extends StatelessWidget {
   late AudiobookPlaylistItem playlist;
 
+  RecentListenedAudiobooks({super.key});
+
   @override
   Widget build(BuildContext context) {
     playlist = AudiobookSource.getAudiobooks.first;
 
     return Column(children: [
-      Container(
+      SizedBox(
         height: RecentAudiobooksConfig.getDefaultRowHeight(context),
         child: Scrollbar(
           scrollbarOrientation: ScrollbarOrientation.bottom,
@@ -58,14 +62,14 @@ class RecentListenedAudiobooks extends StatelessWidget {
               final item = playlist.parts![index];
 
               return Container(
-                  margin: EdgeInsets.symmetric(vertical: 20.0),
+                  margin: const EdgeInsets.symmetric(vertical: 20.0),
                   width: RecentAudiobooksConfig.getDefaultElementWidth(context),
-                  color: Color.fromARGB(179, 48, 194, 109),
+                  color: const Color.fromARGB(179, 48, 194, 109),
                   // ignore: prefer_const_constructors
                   child: Align(
                       alignment: Alignment.center,
                       child: ListTile(
-                          title: Text('${item.title}',
+                          title: Text(item.title,
                               maxLines: RecentAudiobooksConfig.maxLines),
                           leading: const CircleAvatar(
                             // Display the Flutter Logo image asset.

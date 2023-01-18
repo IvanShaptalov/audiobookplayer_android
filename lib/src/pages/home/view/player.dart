@@ -1,4 +1,5 @@
-import 'dart:typed_data';
+
+// ignore_for_file: must_be_immutable
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/services.dart';
 
 class Player extends StatelessWidget {
   AudioPlayer player = AudioPlayer();
+
+  Player({super.key});
 
   Future<int> playAudio() async {
     String audioasset = "assets/audio/red-indian-music.mp3";
@@ -15,9 +18,9 @@ class Player extends StatelessWidget {
     int result = await player.playBytes(audiobytes);
     if (result == 1) {
       //play success
-      print("audio is playing.");
+      // print("audio is playing.");
     } else {
-      print("Error while playing audio.");
+      // print("Error while playing audio.");
     }
     return result;
   }
@@ -31,7 +34,7 @@ class Player extends StatelessWidget {
         icon: const Icon(Icons.play_arrow),
         onPressed: () {
           playAudio();
-          print("good, audio played");
+          // print("good, audio played");
         },
       ),
       

@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class Statistics extends StatelessWidget {
@@ -6,7 +8,7 @@ class Statistics extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Full stats'),
+        title: const Text('Full stats'),
       ),
     );
   }

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 
 class LastAchievementsConfig {
-  static double _minHeight = 75;
-  static double _maxHeight = 76;
+  static const double _minHeight = 75;
+  static const double _maxHeight = 76;
 
-  static double _minWidth = 170;
-  static double _maxWidth = 200;
+  static const double _minWidth = 170;
+  static const double _maxWidth = 200;
 
 
   static double getDefaultRowHeight(context) {
@@ -28,19 +28,21 @@ class LastAchievementsConfig {
 
 
 class LastAchievement extends StatelessWidget {
+  const LastAchievement({super.key});
+
   // int result = player.playBytes(audiobytes);
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 20.0),
+        margin: const EdgeInsets.symmetric(vertical: 20.0),
         width: LastAchievementsConfig.getDefaultRowWidth(context),
         height: LastAchievementsConfig.getDefaultRowHeight(context),
-        color: Color.fromARGB(179, 48, 194, 109),
+        color: const Color.fromARGB(179, 48, 194, 109),
         child: Align(
           alignment: Alignment.centerLeft,
           child: ListTile(
               // Last Achievement
-              title: Text('last achievement'),
+              title: const Text('last achievement'),
               leading: const CircleAvatar(
                 // Display the Flutter Logo image asset.
                 foregroundImage: AssetImage('assets/images/flutter_logo.png'),

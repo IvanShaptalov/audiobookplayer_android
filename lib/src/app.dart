@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
-                    return SampleItemDetailsView();
+                    return const SampleItemDetailsView();
                   case ProfileScreen.routeName:
                     return ProfileScreen();
                   case AchievementsList.routeName:
@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
                   case Statistics.routeName:
                     return Statistics();
                   default:
-                    return HomePage();
+                    return const HomePage();
                 }
               },
             );

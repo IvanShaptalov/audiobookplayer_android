@@ -1,9 +1,9 @@
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/achievements/view/achievement_item.dart';
-import 'package:audiobook_player/src/pages/achievements/view/achievements_screen.dart';
-import 'package:audiobook_player/src/pages/sample_item.dart';
+import 'package:audiobook_player/src/pages/sample_item.dart' show Achievement;
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AchievementsWidget extends StatelessWidget {
   List<Achievement> items;
 
@@ -13,7 +13,7 @@ class AchievementsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: MediaConfig.getmediaHeight(context) * 0.7,
         child: Scrollbar(
           scrollbarOrientation: ScrollbarOrientation.right,

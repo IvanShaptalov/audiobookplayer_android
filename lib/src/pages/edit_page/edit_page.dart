@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
@@ -11,8 +13,8 @@ class AudiobookEdit {
 }
 
 class EditPage extends StatelessWidget {
-  AudiobookEdit audiobookEdit = new AudiobookEdit();
-  GlobalKey<FormState> _audiokey = new GlobalKey<FormState>();
+  AudiobookEdit audiobookEdit = AudiobookEdit();
+  final GlobalKey<FormState> _audiokey = GlobalKey<FormState>();
 
   EditPage({super.key, required this.audiobookPart});
 
@@ -33,81 +35,81 @@ class EditPage extends StatelessWidget {
       appBar: AppBar(title: Text('Edit ${audiobookPart.parent.title}')),
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Container(
+        SizedBox(
             height: MediaConfig.getmediaHeight(context) / 6,
             child: Row(
               children: [
-                Image(image: AssetImage('assets/images/flutter_logo.png')),
+                const Image(image: AssetImage('assets/images/flutter_logo.png')),
                 IconButton(onPressed: () async {
                   await imageDialog();
-                }, icon: Icon(Icons.edit)),
+                }, icon: const Icon(Icons.edit)),
               ],
             )),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
                 height: MediaQuery.of(context).size.height / 2,
                 width: MediaQuery.of(context).size.width / 2,
                 child: Form(
-                    key: this._audiokey,
+                    key: _audiokey,
                     child: Column(children: [
                       TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           validator: (String? inValue) {
-                            if (inValue?.length == 0) {
+                            if (inValue!.isEmpty) {
                               return "Enter valid title please";
                             }
                             return null;
                           },
                           onSaved: (inValue) {
-                            this.audiobookEdit.title = inValue!;
+                            audiobookEdit.title = inValue!;
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "enter title",
                               labelText: "Enter title")),
                       TextFormField(
                           keyboardType: TextInputType.text,
                           validator: (String? inValue) {
-                            if (inValue?.length == 0) {
+                            if (inValue!.isEmpty) {
                               return "Enter valid author please";
                             }
                             return null;
                           },
                           onSaved: (inValue) {
-                            this.audiobookEdit.author = inValue!;
+                            audiobookEdit.author = inValue!;
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "enter author",
                               labelText: "Enter author")),
                       TextFormField(
                           keyboardType: TextInputType.text,
                           validator: (String? inValue) {
-                            if (inValue?.length == 0) {
+                            if (inValue!.isEmpty) {
                               return "Enter valid description please";
                             }
                             return null;
                           },
                           onSaved: (inValue) {
-                            this.audiobookEdit.description = inValue!;
+                            audiobookEdit.description = inValue!;
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "enter description",
                               labelText: "Enter description")),
                       Row(
                         children: [
                           IconButton(
-                              icon: Icon(Icons.save),
+                              icon: const Icon(Icons.save),
                               onPressed: () {
                                 if (_audiokey.currentState!.validate()) {
                                   _audiokey.currentState?.save();
-                                  print(
-                                      '''New title: ${this.audiobookEdit.title}
-                                      \nNew author: ${this.audiobookEdit.author}
-                                      \nNew description: ${this.audiobookEdit.description}''');
+                                  // print(
+                                  //     '''New title: ${audiobookEdit.title}
+                                  //     \nNew author: ${audiobookEdit.author}
+                                  //     \nNew description: ${audiobookEdit.description}''');
                                 }
                               }),
-                          Text('save changes')
+                          const Text('save changes')
                         ],
                       )
                     ]))),

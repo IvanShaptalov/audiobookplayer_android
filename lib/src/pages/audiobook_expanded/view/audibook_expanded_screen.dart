@@ -6,8 +6,6 @@ import 'package:audiobook_player/src/pages/audiobook_expanded/view/head.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/part_picture.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/share_part.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/sleep_timer.dart';
-import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
-import 'package:audiobook_player/src/pages/edit_page/edit_page.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +13,11 @@ import '../../sample_item.dart';
 
 
 class AudiobookExpConfig {
-  double _minHeight = 0;
-  double _maxHeight = 150;
 
-  double _minElementWidth = 0;
-  double _maxElementWidth = 500;
+  final double _minElementWidth = 0;
+  final double _maxElementWidth = 500;
 
-  int _maxLines = 2;
+  final int _maxLines = 2;
 
   int get maxLines {
     return _maxLines;
@@ -59,7 +55,7 @@ class AudiobookExpConfig {
 
 
 class AudiobookExpandedScreen extends StatelessWidget {
-  AudiobookExpandedScreen({super.key, required this.audiobookPart});
+  const AudiobookExpandedScreen({super.key, required this.audiobookPart});
 
   final AudiobookItem audiobookPart;
 
@@ -69,7 +65,7 @@ class AudiobookExpandedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Audiobook Details'),
+        title: const Text('Audiobook Details'),
       ),
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -78,7 +74,7 @@ class AudiobookExpandedScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               height: MediaConfig.getmediaHeight(context) * 0.5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
