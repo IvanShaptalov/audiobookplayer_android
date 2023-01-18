@@ -1,5 +1,5 @@
 import 'package:audiobook_player/src/config/config.dart';
-import 'package:audiobook_player/src/pages/audiobook_expanded/audibook_expanded.dart';
+import 'package:audiobook_player/src/pages/audiobook_expanded/view/audibook_expanded_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/current_playing.dart';
 import 'package:audiobook_player/src/pages/home/view/last_achievement.dart';
 import 'package:audiobook_player/src/pages/home/view/recent_listened_audiobooks.dart';

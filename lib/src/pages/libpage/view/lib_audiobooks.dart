@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../audiobookparts/audiobook_parts.dart';
-import '../sample_item.dart';
+import '../../audiobookparts/audiobook_parts.dart';
+import '../../sample_item.dart';
 import 'library_screen.dart';
 
 class LibAudiobooks extends StatelessWidget {

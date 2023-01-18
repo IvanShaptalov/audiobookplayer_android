@@ -1,6 +1,6 @@
 import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
-import 'package:audiobook_player/src/pages/libpage/library_screen.dart';
+import 'package:audiobook_player/src/pages/libpage/view/library_screen.dart';
 import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
 import 'package:audiobook_player/src/pages/search_page/view/search_page.dart';
 import 'package:flutter/material.dart';

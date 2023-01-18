@@ -1,7 +1,7 @@
 import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
-import 'package:audiobook_player/src/pages/libpage/lib_audiobooks.dart';
+import 'package:audiobook_player/src/pages/libpage/view/lib_audiobooks.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:audiobook_player/src/pages/achievements/achievements_screen.dart';
+import 'package:audiobook_player/src/pages/achievements/view/achievements_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 

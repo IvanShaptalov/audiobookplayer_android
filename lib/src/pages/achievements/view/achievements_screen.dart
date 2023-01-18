@@ -1,6 +1,6 @@
 import 'package:audiobook_player/src/config/config.dart';
-import 'package:audiobook_player/src/pages/achievements/achievements_list.dart';
-import 'package:audiobook_player/src/pages/achievements/top_listeners_link.dart';
+import 'package:audiobook_player/src/pages/achievements/view/achievements_list.dart';
+import 'package:audiobook_player/src/pages/achievements/view/top_listeners_link.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
@@ -53,7 +53,7 @@ class AchievementsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Audiobook by parts'),
+          title: Text('Achievements'),
         ),
         body: Column(
           children: [

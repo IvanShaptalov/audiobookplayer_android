@@ -2,7 +2,7 @@ import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:flutter/material.dart';
 
-import '../audiobook_expanded/audibook_expanded.dart';
+import '../audiobook_expanded/view/audibook_expanded_screen.dart';
 
 class AudiobooksPartsConfig {
   double _minHeight = 100;
@@ -117,7 +117,7 @@ class AudiobookPartsWidget extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        AudiobookExpanded(audiobookPart: item),
+                                        AudiobookExpandedScreen(audiobookPart: item),
                                   ),
                                 );
                               }),
