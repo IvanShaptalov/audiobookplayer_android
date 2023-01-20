@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:just_audio/just_audio.dart';
 import 'package:uuid/uuid.dart';
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
@@ -7,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 Uuid uuid = const Uuid();
+
+bool toggle = false;
+AudioPlayer player = AudioPlayer();
 
 class MediaConfig {
   static double getmediaHeight(context) {
@@ -81,19 +85,31 @@ class AudiobookLoadingConfig {
     var playlist = AudiobookPlaylistItem(0, 'Unnalocated audiobooks', null);
     List<AudiobookItem> audiobooksItems = [];
     for (FileSystemEntity audiobook in audiobooksFiles) {
-      audiobooksItems.add(AudiobookItem(uuid.v1(), audiobook.path.substring(audiobook.path.lastIndexOf('/')+1,audiobook.path.indexOf('.')), playlist, audiobook.path));
+      audiobooksItems.add(AudiobookItem(
+          uuid.v1(),
+          audiobook.path.substring(
+              audiobook.path.lastIndexOf('/') + 1, audiobook.path.indexOf('.')),
+          playlist,
+          audiobook.path));
     }
     playlist.parts = audiobooksItems;
     AudiobookPlaylistItem theWitcherLastWish =
         AudiobookPlaylistItem(1, 'The witcher, Last Wish', null);
     theWitcherLastWish.parts = [
-      AudiobookItem("1", 'Part 0', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("2", 'Part1', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("3", 'Part2', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part3', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("5", 'Part4', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part5', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("7", 'Part6', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("1", 'Part 0', theWitcherLastWish,
+          'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("2", 'Part1', theWitcherLastWish,
+          'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("3", 'Part2', theWitcherLastWish,
+          'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("4", 'Part3', theWitcherLastWish,
+          'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("5", 'Part4', theWitcherLastWish,
+          'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("6", 'Part5', theWitcherLastWish,
+          'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("7", 'Part6', theWitcherLastWish,
+          'assets/audio/red-indian-music.mp3'),
     ];
     return [playlist];
   }
@@ -108,11 +124,10 @@ class FolderPathDialog {
   }
 }
 
-class CurrentPlayingMusicConfig{
+class CurrentPlayingMusicConfig {
   static String _currentPlayingMusic = "";
 
-
-  static String get getMusic{
+  static String get getMusic {
     return _currentPlayingMusic;
   }
 
@@ -120,5 +135,4 @@ class CurrentPlayingMusicConfig{
     print(cpm);
     _currentPlayingMusic = cpm;
   }
-
 }
