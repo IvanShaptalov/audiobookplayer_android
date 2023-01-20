@@ -1,7 +1,7 @@
 class AudiobookItem {
   AudiobookItem(this.id, this.title, this.parent);
   String title;
-  int id;
+  String id;
   AudiobookPlaylistItem parent;
 }
 

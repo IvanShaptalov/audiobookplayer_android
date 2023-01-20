@@ -1,3 +1,4 @@
+import 'package:audiobook_player/src/config/config.dart';
 import 'package:flutter/material.dart';
 
 import 'settings_controller.dart';
@@ -43,9 +44,13 @@ class SettingsView extends StatelessWidget {
             ],
           ),
           TextButton(
-              onPressed: () {},
-              child: Row(
-                  children: const [Icon(Icons.folder), Text('audiobook folders')])),
+              onPressed: () {
+                FolderPathDialog.saveAudiobookFolderPathDialog();
+              },
+              child: Row(children: const [
+                Icon(Icons.folder),
+                Text('audiobook folders')
+              ])),
           DropdownButton<ThemeMode>(
             // Read the selected themeMode from the controller
             value: controller.themeMode,

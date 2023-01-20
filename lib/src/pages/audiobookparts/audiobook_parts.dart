@@ -9,7 +9,7 @@ class AudiobooksPartsConfig {
   final double _maxHeight = 101;
 
 
-  final int _maxLines = 2;
+  final int _maxLines = 3;
 
   final double _minElementWidth = 200;
   final double _maxElementWidth = 500;
