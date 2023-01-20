@@ -1,8 +1,9 @@
 class AudiobookItem {
-  AudiobookItem(this.id, this.title, this.parent);
+  AudiobookItem(this.id, this.title, this.parent, this.path);
   String title;
   String id;
   AudiobookPlaylistItem parent;
+  String path;
 }
 
 

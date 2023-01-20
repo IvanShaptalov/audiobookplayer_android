@@ -1,4 +1,4 @@
-import 'package:audiobook_player/src/config/config.dart' show MediaConfig;
+import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/audiobook_other_parts.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/edit_part.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/equalizer.dart';
@@ -11,9 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../sample_item.dart';
 
-
 class AudiobookExpConfig {
-
   final double _minElementWidth = 0;
   final double _maxElementWidth = 500;
 
@@ -23,13 +21,13 @@ class AudiobookExpConfig {
     return _maxLines;
   }
 
-  double getDefaultListHeight(context){
+  double getDefaultListHeight(context) {
     return MediaQuery.of(context).size.height * 0.3;
   }
 
   double getDefaultRowHeight(context) {
     double currentHeight = MediaConfig.getmediaHeight(context) / 10;
-    return currentHeight;//min _max size checks
+    return currentHeight; //min _max size checks
   }
 
   double getEditColumnHeight(context) {
@@ -38,7 +36,8 @@ class AudiobookExpConfig {
 
   double getDefaultElementWidth(context) {
     double currentWidth = MediaConfig.getmediaWidht(context) / 3;
-    return MediaConfig.getNormalSize(currentWidth, _minElementWidth, _maxElementWidth);
+    return MediaConfig.getNormalSize(
+        currentWidth, _minElementWidth, _maxElementWidth);
   }
 
   double getDefaultRowWidth(context) {
@@ -49,10 +48,7 @@ class AudiobookExpConfig {
   static AudiobookExpConfig get instance {
     return AudiobookExpConfig();
   }
-
-
 }
-
 
 class AudiobookExpandedScreen extends StatelessWidget {
   const AudiobookExpandedScreen({super.key, required this.audiobookPart});
@@ -63,6 +59,7 @@ class AudiobookExpandedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CurrentPlayingMusicConfig.setMusic = audiobookPart.path;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Audiobook Details'),

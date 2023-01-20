@@ -81,19 +81,19 @@ class AudiobookLoadingConfig {
     var playlist = AudiobookPlaylistItem(0, 'Unnalocated audiobooks', null);
     List<AudiobookItem> audiobooksItems = [];
     for (FileSystemEntity audiobook in audiobooksFiles) {
-      audiobooksItems.add(AudiobookItem(uuid.v1(), audiobook.path.substring(audiobook.path.lastIndexOf('/')+1,audiobook.path.indexOf('.')), playlist));
+      audiobooksItems.add(AudiobookItem(uuid.v1(), audiobook.path.substring(audiobook.path.lastIndexOf('/')+1,audiobook.path.indexOf('.')), playlist, audiobook.path));
     }
     playlist.parts = audiobooksItems;
     AudiobookPlaylistItem theWitcherLastWish =
         AudiobookPlaylistItem(1, 'The witcher, Last Wish', null);
     theWitcherLastWish.parts = [
-      AudiobookItem("1", 'Part 0', theWitcherLastWish),
-      AudiobookItem("2", 'Part1', theWitcherLastWish),
-      AudiobookItem("3", 'Part2', theWitcherLastWish),
-      AudiobookItem("4", 'Part3', theWitcherLastWish),
-      AudiobookItem("5", 'Part4', theWitcherLastWish),
-      AudiobookItem("6", 'Part5', theWitcherLastWish),
-      AudiobookItem("7", 'Part6', theWitcherLastWish),
+      AudiobookItem("1", 'Part 0', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("2", 'Part1', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("3", 'Part2', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("4", 'Part3', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("5", 'Part4', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("6", 'Part5', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
+      AudiobookItem("7", 'Part6', theWitcherLastWish, 'assets/audio/red-indian-music.mp3'),
     ];
     return [playlist];
   }
@@ -106,4 +106,19 @@ class FolderPathDialog {
     AudiobookLoadingConfig.audiobookFolderPath = result.toString();
     return result;
   }
+}
+
+class CurrentPlayingMusicConfig{
+  static String _currentPlayingMusic = "";
+
+
+  static String get getMusic{
+    return _currentPlayingMusic;
+  }
+
+  static set setMusic(String cpm) {
+    print(cpm);
+    _currentPlayingMusic = cpm;
+  }
+
 }
