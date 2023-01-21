@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:audiobook_player/src/config/config.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
 
 class Player extends StatefulWidget {
@@ -12,7 +11,6 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
-
   void playAudio() async {
     String musicPath = CurrentPlayingMusicConfig.getMusic;
     final duration = await player.setFilePath(musicPath);
@@ -36,21 +34,26 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      child: IconButton(
-        key: UniqueKey(),
-        alignment: Alignment.bottomCenter,
-        icon: toggle
-            ? Icon(Icons.pause)
-            : Icon(
-                Icons.play_arrow,
-              ),
-        onPressed: () {
+    return Column(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        IconButton(
+          key: UniqueKey(),
+          alignment: Alignment.bottomCenter,
+          icon: toggle
+              ? const Icon(Icons.pause)
+              : const Icon(
+                  Icons.play_arrow,
+                ),
+          onPressed: () {
             setState(() {
               nextState();
             });
           },
-      ),
-    );
+        ),
+      ]),
+      Row(
+        children: [],
+      )
+    ]);
   }
 }
