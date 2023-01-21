@@ -6,6 +6,8 @@ import 'package:audiobook_player/src/pages/audiobook_expanded/view/head.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/part_picture.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/share_part.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/sleep_timer.dart';
+import 'package:audiobook_player/src/pages/home/home_page.dart';
+import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:flutter/material.dart';
 
@@ -62,6 +64,13 @@ class AudiobookExpandedScreen extends StatelessWidget {
     CurrentPlayingMusicConfig.setMusic = audiobookPart.path;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.restorablePushNamed(context, HomePage.routeName);
+          },
+        ),
+        automaticallyImplyLeading: false,
         title: const Text('Audiobook Details'),
       ),
       body:
