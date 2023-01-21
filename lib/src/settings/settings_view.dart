@@ -45,7 +45,7 @@ class SettingsView extends StatelessWidget {
           ),
           TextButton(
               onPressed: () {
-                FolderPathDialog.saveAudiobookFolderPathDialog();
+                FolderPathDialog.saveAudiobookFolderPathDialog(context);
               },
               child: Row(children: const [
                 Icon(Icons.folder),

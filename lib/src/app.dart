@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
 
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
-          // SettingsController to display the correct theme. 
+          // SettingsController to display the correct theme.
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
@@ -83,6 +83,8 @@ class MyApp extends StatelessWidget {
                     return TopListeners();
                   case Statistics.routeName:
                     return Statistics();
+                  case HomePage.routeName:
+                    return const HomePage();
                   default:
                     return const HomePage();
                 }

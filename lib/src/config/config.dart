@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:audiobook_player/src/pages/home/home_page.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:uuid/uuid.dart';
 import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
@@ -88,38 +89,21 @@ class AudiobookLoadingConfig {
       audiobooksItems.add(AudiobookItem(
           uuid.v1(),
           audiobook.path.substring(
-              audiobook.path.lastIndexOf('/') + 1, audiobook.path.indexOf('.')),
+              audiobook.path.lastIndexOf('/') + 1, audiobook.path.indexOf('.mp3')),
           playlist,
           audiobook.path));
     }
     playlist.parts = audiobooksItems;
-    AudiobookPlaylistItem theWitcherLastWish =
-        AudiobookPlaylistItem(1, 'The witcher, Last Wish', null);
-    theWitcherLastWish.parts = [
-      AudiobookItem("1", 'Part 0', theWitcherLastWish,
-          'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("2", 'Part1', theWitcherLastWish,
-          'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("3", 'Part2', theWitcherLastWish,
-          'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part3', theWitcherLastWish,
-          'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("5", 'Part4', theWitcherLastWish,
-          'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part5', theWitcherLastWish,
-          'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("7", 'Part6', theWitcherLastWish,
-          'assets/audio/red-indian-music.mp3'),
-    ];
     return [playlist];
   }
 }
 
 class FolderPathDialog {
-  static Future<String> saveAudiobookFolderPathDialog() async {
+  static Future<String> saveAudiobookFolderPathDialog(BuildContext context) async {
     dynamic result = await FilePicker.platform.getDirectoryPath();
     print(result.toString());
     AudiobookLoadingConfig.audiobookFolderPath = result.toString();
+    Navigator.restorablePushNamed(context, HomePage.routeName);
     return result;
   }
 }

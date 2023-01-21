@@ -32,47 +32,6 @@ class AudiobookSource {
 
     var loadedAudiobooks =
         AudiobookLoadingConfig.convertAudiobooksFromFiles(files);
-
-    AudiobookPlaylistItem theWitcherBloodOfElves =
-        AudiobookPlaylistItem(1, 'The witcher, Blood of elves', null);
-    theWitcherBloodOfElves.parts = [
-      AudiobookItem("1", 'Part0', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("2", 'Part1', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("3", 'Part2', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part3', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part4', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part5', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part6', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("5", 'Part7', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part8', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("7", 'Part9', theWitcherBloodOfElves, 'assets/audio/red-indian-music.mp3'),
-    ];
-
-    AudiobookPlaylistItem whisperer =
-        AudiobookPlaylistItem(1, 'The whisperer in darkness', null);
-    whisperer.parts = [
-      AudiobookItem("2", 'Part1', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("3", 'Part2', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part3', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("1", 'Part0', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("5", 'Part4', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part5', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part6', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part7', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part8', whisperer, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("7", 'Part9', whisperer, 'assets/audio/red-indian-music.mp3'),
-    ];
-
-    AudiobookPlaylistItem sample1 = AudiobookPlaylistItem(1, 'sample1', null);
-    sample1.parts = [
-      AudiobookItem("1", 'Part0', sample1, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("2", 'Part1', sample1, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("3", 'Part2', sample1, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("4", 'Part3', sample1, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("5", 'Part4', sample1, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("6", 'Part5', sample1, 'assets/audio/red-indian-music.mp3'),
-      AudiobookItem("7", 'Part6', sample1, 'assets/audio/red-indian-music.mp3'),
-    ];
-    return [whisperer, sample1, theWitcherBloodOfElves] + loadedAudiobooks;
+    return loadedAudiobooks;
   }
 }
