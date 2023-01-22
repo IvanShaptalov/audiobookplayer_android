@@ -23,6 +23,9 @@ class AchievementSource {
 }
 
 class AudiobookSource {
+  static List<AudiobookPlaylistItem> audiobooks = [];
+  static bool loaded = false;
+
   static List<AudiobookPlaylistItem> get getAudiobooks {
     String audiobookFolder = AudiobookLoadingConfig.getAudiobookFolderPath;
     print('audiobooks folder in path: $audiobookFolder');
@@ -32,6 +35,8 @@ class AudiobookSource {
 
     var loadedAudiobooks =
         AudiobookLoadingConfig.convertAudiobooksFromFiles(files);
+    audiobooks = loadedAudiobooks;
+    loaded = true;
     return loadedAudiobooks;
   }
 }

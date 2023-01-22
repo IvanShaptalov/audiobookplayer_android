@@ -46,7 +46,7 @@ class Library extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    items = AudiobookSource.getAudiobooks;
+    items = AudiobookSource.loaded?AudiobookSource.audiobooks : AudiobookSource.getAudiobooks;
 
     return SizedBox(
         height: MediaQuery.of(context).size.height * 0.6,

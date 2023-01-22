@@ -43,8 +43,7 @@ class RecentListenedAudiobooks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    playlist = AudiobookSource.getAudiobooks.last;
-
+    playlist = AudiobookSource.loaded?AudiobookSource.audiobooks.first : AudiobookSource.getAudiobooks.first;
     return Column(children: [
       SizedBox(
         height: RecentAudiobooksConfig.getDefaultRowHeight(context),

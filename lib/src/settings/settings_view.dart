@@ -1,4 +1,5 @@
 import 'package:audiobook_player/src/config/config.dart';
+import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:flutter/material.dart';
 
 import 'settings_controller.dart';
@@ -46,6 +47,7 @@ class SettingsView extends StatelessWidget {
           TextButton(
               onPressed: () {
                 FolderPathDialog.saveAudiobookFolderPathDialog(context);
+                AudiobookSource.loaded = false;
               },
               child: Row(children: const [
                 Icon(Icons.folder),
