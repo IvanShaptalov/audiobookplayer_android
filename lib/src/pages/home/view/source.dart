@@ -23,10 +23,18 @@ class AchievementSource {
 }
 
 class AudiobookSource {
-  static List<AudiobookPlaylistItem> audiobooks = [];
-  static bool loaded = false;
+  static List<AudiobookPlaylistItem>? cashedAudiobooks;
 
-  static List<AudiobookPlaylistItem> get getAudiobooks {
+  static void loadAndCashAudiobooks() {
+    _getAudiobooksFromFiles()
+        .then((audiobooks) => cashedAudiobooks = audiobooks);
+  }
+
+  static Future<void>loadAndCashAudiobooksAsync() async {
+    await _getAudiobooksFromFiles();
+  }
+
+  static Future<List<AudiobookPlaylistItem>> _getAudiobooksFromFiles() async {
     String audiobookFolder = AudiobookLoadingConfig.getAudiobookFolderPath;
     print('audiobooks folder in path: $audiobookFolder');
 
@@ -35,8 +43,8 @@ class AudiobookSource {
 
     var loadedAudiobooks =
         AudiobookLoadingConfig.convertAudiobooksFromFiles(files);
-    audiobooks = loadedAudiobooks;
-    loaded = true;
+    cashedAudiobooks = await loadedAudiobooks;
+
     return loadedAudiobooks;
   }
 }

@@ -7,7 +7,6 @@ import 'package:audiobook_player/src/pages/audiobook_expanded/view/part_picture.
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/share_part.dart';
 import 'package:audiobook_player/src/pages/audiobook_expanded/view/sleep_timer.dart';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
-import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:flutter/material.dart';
 

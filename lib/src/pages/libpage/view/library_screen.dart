@@ -42,15 +42,20 @@ class Library extends StatelessWidget {
     super.key,
   });
 
-  late List<AudiobookPlaylistItem> items;
+  late List<AudiobookPlaylistItem>? items;
 
   @override
   Widget build(BuildContext context) {
-    items = AudiobookSource.loaded?AudiobookSource.audiobooks : AudiobookSource.getAudiobooks;
+    items = AudiobookSource.cashedAudiobooks;
 
-    return SizedBox(
+
+    if (items != null) {
+      return SizedBox(
         height: MediaQuery.of(context).size.height * 0.6,
-        child: LibAudiobooks(items: items));
+        child: LibAudiobooks(items: items!));
+    } else {
+      return const Text('Nothing here');
+    }
   }
 
   

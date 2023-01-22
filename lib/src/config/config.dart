@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:uuid/uuid.dart';
-import 'package:audiobook_player/src/pages/audiobookparts/audiobook_parts.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,7 @@ Uuid uuid = const Uuid();
 
 bool toggle = false;
 AudioPlayer player = AudioPlayer();
+AudioPlayer demonPlayer = AudioPlayer();
 
 class MediaConfig {
   static double getmediaHeight(context) {
@@ -45,7 +45,8 @@ class AudiobookLoadingConfig {
     'mp3',
   ];
 
-  static String _audiobookFolderPath = "";
+  static String _audiobookFolderPath = "/home/van/Music";
+  
   static set audiobookFolderPath(String folderPath) =>
       _audiobookFolderPath = folderPath;
   static get getAudiobookFolderPath => _audiobookFolderPath;
@@ -80,18 +81,26 @@ class AudiobookLoadingConfig {
     return songs;
   }
 
-  static List<AudiobookPlaylistItem> convertAudiobooksFromFiles(
-      List<FileSystemEntity> audiobooksFiles) {
+  static Future<List<AudiobookPlaylistItem>> convertAudiobooksFromFiles(
+      List<FileSystemEntity> audiobooksFiles)  async{
     print(audiobooksFiles);
     var playlist = AudiobookPlaylistItem(0, 'Unnalocated audiobooks', null);
     List<AudiobookItem> audiobooksItems = [];
     for (FileSystemEntity audiobook in audiobooksFiles) {
+      print('try get duration');
+      // var duration = await player.setFilePath(audiobook.path);
+      print('get duration');
+      // if (duration == null){
+      //   break;
+      // }
       audiobooksItems.add(AudiobookItem(
           uuid.v1(),
           audiobook.path.substring(
               audiobook.path.lastIndexOf('/') + 1, audiobook.path.indexOf('.mp3')),
           playlist,
-          audiobook.path));
+          audiobook.path,
+          // duration
+          ));
     }
     playlist.parts = audiobooksItems;
     return [playlist];
