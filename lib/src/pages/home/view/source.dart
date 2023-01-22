@@ -1,6 +1,5 @@
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
-import 'package:flutter/gestures.dart';
 
 class AchievementSource {
   static List<Achievement> get getAchievements {
@@ -25,12 +24,11 @@ class AchievementSource {
 class AudiobookSource {
   static List<AudiobookPlaylistItem>? cashedAudiobooks;
 
-  static void loadAndCashAudiobooks() {
-    _getAudiobooksFromFiles()
-        .then((audiobooks) => cashedAudiobooks = audiobooks);
+  static void loadAndCashAudiobooksSync() {
+    _getAudiobooksFromFiles();
   }
 
-  static Future<void>loadAndCashAudiobooksAsync() async {
+  static Future<void> loadAndCashAudiobooksAsync() async {
     await _getAudiobooksFromFiles();
   }
 
@@ -44,7 +42,7 @@ class AudiobookSource {
     var loadedAudiobooks =
         AudiobookLoadingConfig.convertAudiobooksFromFiles(files);
     cashedAudiobooks = await loadedAudiobooks;
-
+    print('loaded');
     return loadedAudiobooks;
   }
 }

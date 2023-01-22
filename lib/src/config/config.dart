@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
+import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:uuid/uuid.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
@@ -112,7 +113,9 @@ class FolderPathDialog {
     dynamic result = await FilePicker.platform.getDirectoryPath();
     print(result.toString());
     AudiobookLoadingConfig.audiobookFolderPath = result.toString();
-    Navigator.restorablePushNamed(context, HomePage.routeName);
+    AudiobookSource.loadAndCashAudiobooksSync();
+    await Navigator.restorablePushNamed(context, HomePage.routeName);
+
     return result;
   }
 }
