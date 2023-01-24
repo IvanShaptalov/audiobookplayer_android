@@ -1,10 +1,10 @@
 class AudiobookItem {
-  AudiobookItem(this.id, this.title, this.parent, this.path);//, this.duration);
+  AudiobookItem(this.id, this.title, this.parent, this.path, this.duration);
   String title;
   String id;
   AudiobookPlaylistItem parent;
   String path;
-  // Duration duration;
+  Duration duration;
 }
 
 

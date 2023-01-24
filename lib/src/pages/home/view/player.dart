@@ -12,8 +12,13 @@ class Player extends StatefulWidget {
 
 class _PlayerState extends State<Player> {
   void playAudio() async {
+    print("are you work?");
     String musicPath = CurrentPlayingMusicConfig.getMusic;
     final duration = await player.setFilePath(musicPath);
+
+    print("duration is: ${duration!.inSeconds}");
+    print("are you work after?");
+
     player.play();
   }
 
@@ -36,6 +41,7 @@ class _PlayerState extends State<Player> {
   Widget build(BuildContext context) {
     return Column(children: [
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        IconButton(onPressed: () {}, icon: Icon(Icons.skip_previous)),
         IconButton(
           key: UniqueKey(),
           alignment: Alignment.bottomCenter,
@@ -50,6 +56,7 @@ class _PlayerState extends State<Player> {
             });
           },
         ),
+        IconButton(onPressed: () {}, icon: Icon(Icons.skip_next)),
       ]),
       Row(
         children: [],

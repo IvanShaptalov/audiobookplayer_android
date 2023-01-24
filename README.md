@@ -28,3 +28,10 @@ the `lib/src/localization` directory.
 To support additional languages, please visit the tutorial on
 [Internationalizing Flutter
 apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+
+
+ATTENTION!
+To ubuntu users:
+
+$ sudo apt install update
+$ sudo apt install mpv

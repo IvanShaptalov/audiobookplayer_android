@@ -47,7 +47,7 @@ class AudiobookLoadingConfig {
   ];
 
   static String _audiobookFolderPath = "/home/van/Music";
-  
+
   static set audiobookFolderPath(String folderPath) =>
       _audiobookFolderPath = folderPath;
   static get getAudiobookFolderPath => _audiobookFolderPath;
@@ -83,37 +83,53 @@ class AudiobookLoadingConfig {
   }
 
   static Future<List<AudiobookPlaylistItem>> convertAudiobooksFromFiles(
-      List<FileSystemEntity> audiobooksFiles)  async{
+      List<FileSystemEntity> audiobooksFiles) async {
     print(audiobooksFiles);
     var playlist = AudiobookPlaylistItem(0, 'Unnalocated audiobooks', null);
     List<AudiobookItem> audiobooksItems = [];
+    await demonPlayer.setVolume(0);
+
     for (FileSystemEntity audiobook in audiobooksFiles) {
-      print('try get duration');
-      // var duration = await player.setFilePath(audiobook.path);
-      print('get duration');
-      // if (duration == null){
-      //   break;
-      // }
+      Duration? duration;
+
+      try {
+        print('try get duration');
+        duration =
+            await demonPlayer.setAudioSource(AudioSource.file(audiobook.path));
+        print('get duration');
+        if (duration == null) {
+          break;
+        }
+      } catch (e) {
+        print(e);
+      }
+
+      if (duration == null) {
+        break;
+      }
       audiobooksItems.add(AudiobookItem(
           uuid.v1(),
-          audiobook.path.substring(
-              audiobook.path.lastIndexOf('/') + 1, audiobook.path.indexOf('.mp3')),
+          audiobook.path.substring(audiobook.path.lastIndexOf('/') + 1,
+              audiobook.path.indexOf('.mp3')),
           playlist,
           audiobook.path,
-          // duration
-          ));
+          duration));
     }
+    await demonPlayer.stop();
+
     playlist.parts = audiobooksItems;
     return [playlist];
   }
 }
 
 class FolderPathDialog {
-  static Future<String> saveAudiobookFolderPathDialog(BuildContext context) async {
+  static Future<String> saveAudiobookFolderPathDialog(
+      BuildContext context) async {
     dynamic result = await FilePicker.platform.getDirectoryPath();
     print(result.toString());
     AudiobookLoadingConfig.audiobookFolderPath = result.toString();
     AudiobookSource.loadAndCashAudiobooksSync();
+    // ignore: await_only_futures
     await Navigator.restorablePushNamed(context, HomePage.routeName);
 
     return result;
