@@ -47,6 +47,8 @@ class SettingsView extends StatelessWidget {
           ),
           TextButton(
               onPressed: () {
+                AudiobookSource.cashedAudiobooks = null;
+
                 FolderPathDialog.saveAudiobookFolderPathDialog(context);
               },
               child: Row(children: const [

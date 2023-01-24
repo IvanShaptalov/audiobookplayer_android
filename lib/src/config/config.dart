@@ -46,7 +46,7 @@ class AudiobookLoadingConfig {
     'mp3',
   ];
 
-  static String _audiobookFolderPath = "/home/van/Music";
+  static String _audiobookFolderPath = "";
 
   static set audiobookFolderPath(String folderPath) =>
       _audiobookFolderPath = folderPath;

@@ -10,7 +10,6 @@ class LibraryConfig {
   final double _minHeight = 100;
   final double _maxHeight = 101;
 
-
   final int _maxLines = 2;
 
   final double _minElementWidth = 200;
@@ -48,15 +47,12 @@ class Library extends StatelessWidget {
   Widget build(BuildContext context) {
     items = AudiobookSource.cashedAudiobooks;
 
-
     if (items != null) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.6,
-        child: LibAudiobooks(items: items!));
+          height: MediaQuery.of(context).size.height * 0.6,
+          child: LibAudiobooks(items: items!));
     } else {
-      return const Text('Nothing here');
+      return Column(children: [Text('loading, please wait')]);
     }
   }
-
-  
 }
