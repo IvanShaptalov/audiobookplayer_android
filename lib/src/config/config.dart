@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
+import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:uuid/uuid.dart';
@@ -9,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 Uuid uuid = const Uuid();
-
 bool toggle = false;
+
+String? musicPath;
 AudioPlayer player = AudioPlayer();
 AudioPlayer demonPlayer = AudioPlayer();
 

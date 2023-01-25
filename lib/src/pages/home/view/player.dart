@@ -2,24 +2,24 @@
 
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class Player extends StatefulWidget {
-  const Player({super.key});
+  Player({super.key});
 
   @override
   State<Player> createState() => _PlayerState();
 }
 
 class _PlayerState extends State<Player> {
-  String? musicPath;
+  
 
   void playAudio() async {
     print("are you work?");
     if (musicPath != CurrentPlayingMusicConfig.getMusic) {
+      print('loaded new instance');
       musicPath = CurrentPlayingMusicConfig.getMusic;
       final duration = await player.setFilePath(musicPath!);
-      print("duration is: ${duration!.inSeconds}");
-      print("are you work after?");
     }
 
     player.play();

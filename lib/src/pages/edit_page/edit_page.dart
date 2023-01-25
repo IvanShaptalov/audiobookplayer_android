@@ -115,7 +115,7 @@ class EditPage extends StatelessWidget {
                     ]))),
           ],
         ),
-        Player()
+        Player(),
       ]),
     );
   }

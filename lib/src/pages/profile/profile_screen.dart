@@ -158,7 +158,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
-        Player()
+        Player(),
       ]),
     );
   }
