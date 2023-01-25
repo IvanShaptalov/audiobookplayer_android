@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:async';
+
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
@@ -12,20 +14,19 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
-  
-
-  void playAudio() async {
+  void playAudio() {
     print("are you work?");
     if (musicPath != CurrentPlayingMusicConfig.getMusic) {
       print('loaded new instance');
       musicPath = CurrentPlayingMusicConfig.getMusic;
-      final duration = await player.setFilePath(musicPath!);
+      final duration = player.setFilePath(musicPath!);
     }
-
     player.play();
+    player.setVolume(1);
+    print('play from ${player.position}');
   }
 
-  void pauseAudio() async {
+  void pauseAudio() {
     player.pause();
   }
 
@@ -59,11 +60,59 @@ class _PlayerState extends State<Player> {
             });
           },
         ),
-        IconButton(onPressed: () {}, icon: Icon(Icons.skip_next)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.skip_next)),
       ]),
-      Row(
-        children: [],
-      )
+      AudioSlider()
     ]);
+  }
+}
+
+class AudioSlider extends StatefulWidget {
+  AudioSlider({super.key});
+
+  @override
+  State<AudioSlider> createState() => _AudioSlider();
+}
+
+class _AudioSlider extends State<AudioSlider> {
+  @override
+  void initState() {
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String durationToHFormat(String stringDuration) {
+    if (!stringDuration.contains('.')) {
+      return stringDuration;
+    }
+    var reversed = stringDuration.split('').reversed.join();
+    var cutted = reversed.substring(reversed.indexOf('.') + 1);
+    return cutted.split('').reversed.join();
+  }
+
+    // TODO: implement build
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(durationToHFormat(player.position.toString())),
+          SizedBox(
+            width: MediaConfig.getmediaWidht(context) / 2,
+            child: Slider(
+              value: player.position.inMilliseconds.toDouble(),
+              max: player.duration?.inMilliseconds.toDouble() ?? 0,
+              onChanged: (value) {
+                player.seek(Duration(milliseconds: value.round()));
+                print(player.position);
+                setState(() {});
+              },
+            ),
+          ),
+          Text(durationToHFormat(player.duration.toString())),
+        ],
+      );
   }
 }
