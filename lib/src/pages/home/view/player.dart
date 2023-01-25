@@ -14,11 +14,47 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
+  void nextAudio() {
+    var audiobook = CurrentPlayingMusicConfig.getAudiobook;
+    var playlist = audiobook.parent;
+
+    if (playlist.hasParts) {
+      assert (playlist.parts!.isNotEmpty);
+
+      int l = playlist.parts!.length; // full length
+      int index = playlist.parts!.indexOf(audiobook);
+      var nextAudiobook = playlist.parts![index+1 < l? index+1: 0];
+      CurrentPlayingMusicConfig.setMusic = nextAudiobook;
+    }
+    else{
+      playAudio();
+    }
+    playAudio();
+  }
+
+  void previousAudio() {
+    var audiobook = CurrentPlayingMusicConfig.getAudiobook;
+    var playlist = audiobook.parent;
+
+    if (playlist.hasParts) {
+      assert (playlist.parts!.isNotEmpty);
+
+      int l = playlist.parts!.length; // full length
+      int index = playlist.parts!.indexOf(audiobook);
+      var nextAudiobook = playlist.parts![index-1 >= 0? index-1: l-1];
+      CurrentPlayingMusicConfig.setMusic = nextAudiobook;
+    }
+    else{
+      playAudio();
+    }
+    playAudio();
+  }
+
   void playAudio() {
     print("are you work?");
-    if (musicPath != CurrentPlayingMusicConfig.getMusic) {
+    if (musicPath != CurrentPlayingMusicConfig.getAudiobook) {
       print('loaded new instance');
-      musicPath = CurrentPlayingMusicConfig.getMusic;
+      musicPath = CurrentPlayingMusicConfig.getAudiobook.path;
       final duration = player.setFilePath(musicPath!);
     }
     player.play();
@@ -45,7 +81,7 @@ class _PlayerState extends State<Player> {
   Widget build(BuildContext context) {
     return Column(children: [
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        IconButton(onPressed: () {}, icon: Icon(Icons.skip_previous)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.skip_previous)),
         IconButton(
           key: UniqueKey(),
           alignment: Alignment.bottomCenter,
@@ -60,7 +96,11 @@ class _PlayerState extends State<Player> {
             });
           },
         ),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.skip_next)),
+        IconButton(
+            onPressed: () {
+              nextAudio();
+            },
+            icon: const Icon(Icons.skip_next)),
       ]),
       AudioSlider()
     ]);
@@ -86,33 +126,33 @@ class _AudioSlider extends State<AudioSlider> {
   @override
   Widget build(BuildContext context) {
     String durationToHFormat(String stringDuration) {
-    if (!stringDuration.contains('.')) {
-      return stringDuration;
+      if (!stringDuration.contains('.')) {
+        return stringDuration;
+      }
+      var reversed = stringDuration.split('').reversed.join();
+      var cutted = reversed.substring(reversed.indexOf('.') + 1);
+      return cutted.split('').reversed.join();
     }
-    var reversed = stringDuration.split('').reversed.join();
-    var cutted = reversed.substring(reversed.indexOf('.') + 1);
-    return cutted.split('').reversed.join();
-  }
 
     // TODO: implement build
     return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(durationToHFormat(player.position.toString())),
-          SizedBox(
-            width: MediaConfig.getmediaWidht(context) / 2,
-            child: Slider(
-              value: player.position.inMilliseconds.toDouble(),
-              max: player.duration?.inMilliseconds.toDouble() ?? 0,
-              onChanged: (value) {
-                player.seek(Duration(milliseconds: value.round()));
-                print(player.position);
-                setState(() {});
-              },
-            ),
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(durationToHFormat(player.position.toString())),
+        SizedBox(
+          width: MediaConfig.getmediaWidht(context) / 2,
+          child: Slider(
+            value: player.position.inMilliseconds.toDouble(),
+            max: player.duration?.inMilliseconds.toDouble() ?? 0,
+            onChanged: (value) {
+              player.seek(Duration(milliseconds: value.round()));
+              print(player.position);
+              setState(() {});
+            },
           ),
-          Text(durationToHFormat(player.duration.toString())),
-        ],
-      );
+        ),
+        Text(durationToHFormat(player.duration.toString())),
+      ],
+    );
   }
 }

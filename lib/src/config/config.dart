@@ -139,14 +139,14 @@ class FolderPathDialog {
 }
 
 class CurrentPlayingMusicConfig {
-  static String _currentPlayingMusic = "";
+  static AudiobookItem _currentPlayingAudiobook = AudiobookItem.getAudiobookItem();
 
-  static String get getMusic {
-    return _currentPlayingMusic;
+  static AudiobookItem get getAudiobook {
+    return _currentPlayingAudiobook;
   }
 
-  static set setMusic(String cpm) {
-    print(cpm);
-    _currentPlayingMusic = cpm;
+  static set setMusic(AudiobookItem audiobook) {
+    print(audiobook);
+    _currentPlayingAudiobook = audiobook;
   }
 }

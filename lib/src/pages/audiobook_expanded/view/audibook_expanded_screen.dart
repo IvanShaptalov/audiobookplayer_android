@@ -60,7 +60,7 @@ class AudiobookExpandedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CurrentPlayingMusicConfig.setMusic = audiobookPart.path;
+    CurrentPlayingMusicConfig.setMusic = audiobookPart;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
