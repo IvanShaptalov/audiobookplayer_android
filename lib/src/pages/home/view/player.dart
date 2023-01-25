@@ -11,19 +11,22 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
+  String? musicPath;
+
   void playAudio() async {
     print("are you work?");
-    String musicPath = CurrentPlayingMusicConfig.getMusic;
-    final duration = await player.setFilePath(musicPath);
-
-    print("duration is: ${duration!.inSeconds}");
-    print("are you work after?");
+    if (musicPath != CurrentPlayingMusicConfig.getMusic) {
+      musicPath = CurrentPlayingMusicConfig.getMusic;
+      final duration = await player.setFilePath(musicPath!);
+      print("duration is: ${duration!.inSeconds}");
+      print("are you work after?");
+    }
 
     player.play();
   }
 
-  void stopAudio() async {
-    player.stop();
+  void pauseAudio() async {
+    player.pause();
   }
 
   void nextState() {
@@ -32,7 +35,7 @@ class _PlayerState extends State<Player> {
       playAudio();
       print("good, audio played");
     } else {
-      stopAudio();
+      pauseAudio();
       print("good, audio stopped");
     }
   }
