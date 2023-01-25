@@ -19,14 +19,13 @@ class _PlayerState extends State<Player> {
     var playlist = audiobook.parent;
 
     if (playlist.hasParts) {
-      assert (playlist.parts!.isNotEmpty);
+      assert(playlist.parts!.isNotEmpty);
 
       int l = playlist.parts!.length; // full length
       int index = playlist.parts!.indexOf(audiobook);
-      var nextAudiobook = playlist.parts![index+1 < l? index+1: 0];
+      var nextAudiobook = playlist.parts![index + 1 < l ? index + 1 : 0];
       CurrentPlayingMusicConfig.setMusic = nextAudiobook;
-    }
-    else{
+    } else {
       playAudio();
     }
     playAudio();
@@ -37,14 +36,13 @@ class _PlayerState extends State<Player> {
     var playlist = audiobook.parent;
 
     if (playlist.hasParts) {
-      assert (playlist.parts!.isNotEmpty);
+      assert(playlist.parts!.isNotEmpty);
 
       int l = playlist.parts!.length; // full length
       int index = playlist.parts!.indexOf(audiobook);
-      var nextAudiobook = playlist.parts![index-1 >= 0? index-1: l-1];
+      var nextAudiobook = playlist.parts![index - 1 >= 0 ? index - 1 : l - 1];
       CurrentPlayingMusicConfig.setMusic = nextAudiobook;
-    }
-    else{
+    } else {
       playAudio();
     }
     playAudio();
@@ -81,7 +79,11 @@ class _PlayerState extends State<Player> {
   Widget build(BuildContext context) {
     return Column(children: [
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.skip_previous)),
+        IconButton(
+            onPressed: () {
+              previousAudio();
+            },
+            icon: const Icon(Icons.skip_previous)),
         IconButton(
           key: UniqueKey(),
           alignment: Alignment.bottomCenter,
