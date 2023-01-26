@@ -15,6 +15,12 @@ class Player extends StatefulWidget {
 
 class _PlayerState extends State<Player> {
   void nextAudio() {
+    // start play music and change play button to pause icon
+
+    setState(() {
+      toggle = true;
+    });
+
     var audiobook = CurrentPlayingMusicConfig.getAudiobook;
     var playlist = audiobook.parent;
 
@@ -32,6 +38,10 @@ class _PlayerState extends State<Player> {
   }
 
   void previousAudio() {
+    // start play music and change play button to pause icon
+    setState(() {
+      toggle = true;
+    });
     var audiobook = CurrentPlayingMusicConfig.getAudiobook;
     var playlist = audiobook.parent;
 
@@ -50,13 +60,12 @@ class _PlayerState extends State<Player> {
 
   void playAudio() {
     print("are you work?");
-    if (musicPath != CurrentPlayingMusicConfig.getAudiobook) {
+    if (musicPath != CurrentPlayingMusicConfig.getAudiobook.path) {
       print('loaded new instance');
       musicPath = CurrentPlayingMusicConfig.getAudiobook.path;
       final duration = player.setFilePath(musicPath!);
     }
     player.play();
-    player.setVolume(1);
     print('play from ${player.position}');
   }
 
@@ -77,7 +86,10 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      SizedBox(
+          child:
+              Text(CurrentPlayingMusicConfig.getAudiobook.title, maxLines: 1)),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         IconButton(
             onPressed: () {
@@ -120,7 +132,9 @@ class _AudioSlider extends State<AudioSlider> {
   @override
   void initState() {
     Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {});
+      if (player.position.inSeconds > 0) {
+        setState(() {});
+      }
     });
     super.initState();
   }
@@ -136,7 +150,6 @@ class _AudioSlider extends State<AudioSlider> {
       return cutted.split('').reversed.join();
     }
 
-    // TODO: implement build
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -144,6 +157,7 @@ class _AudioSlider extends State<AudioSlider> {
         SizedBox(
           width: MediaConfig.getmediaWidht(context) / 2,
           child: Slider(
+            
             value: player.position.inMilliseconds.toDouble(),
             max: player.duration?.inMilliseconds.toDouble() ?? 0,
             onChanged: (value) {
