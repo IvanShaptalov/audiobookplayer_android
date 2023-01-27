@@ -24,25 +24,9 @@ class AchievementSource {
 class AudiobookSource {
   static List<AudiobookPlaylistItem>? cashedAudiobooks;
 
-  static void loadAndCashAudiobooksSync() {
-    _getAudiobooksFromFiles();
-  }
-
   static Future<void> loadAndCashAudiobooksAsync() async {
-    await _getAudiobooksFromFiles();
+    var audiobooks = await AudiobookLoadingConfig.getConvertedAudiobooks();
+    cashedAudiobooks = audiobooks;
   }
 
-  static Future<List<AudiobookPlaylistItem>> _getAudiobooksFromFiles() async {
-    String audiobookFolder = AudiobookLoadingConfig.getAudiobookFolderPath;
-    print('audiobooks folder in path: $audiobookFolder');
-
-    var files =
-        AudiobookLoadingConfig.loadAudiobooksFromFolder(audiobookFolder);
-
-    var loadedAudiobooks =
-        AudiobookLoadingConfig.convertAudiobooksFromFiles(files);
-    cashedAudiobooks = await loadedAudiobooks;
-    print('loaded');
-    return loadedAudiobooks;
-  }
 }

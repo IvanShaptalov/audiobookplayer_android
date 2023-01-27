@@ -1,15 +1,30 @@
 class AudiobookItem {
-  AudiobookItem(this.id, this.title, this.parent, this.path, this.duration);
+  AudiobookItem(this.id, this.title, this.parent, this.path);
   String title;
   String id;
   AudiobookPlaylistItem parent;
   String path;
-  Duration duration;
 
   static AudiobookItem getAudiobookItem() {
     var playlist = AudiobookPlaylistItem(-1, 'pure playlist', null);
-    return AudiobookItem('dalskjfhnjk', 'red indian music', playlist,
-        'assets/audio/red-indian-music.mp3', Duration(minutes: 5));
+    return AudiobookItem('dalskjfhnjk', 'red-indian-music', playlist,
+        'assets/audio/red-indian-music.mp3');
+  }
+
+  @override
+  int get hashCode {
+    return toString().hashCode;
+  }
+
+
+  @override
+  bool operator ==(Object other) {
+    return toString() == other.toString();
+  }
+
+  @override
+  String toString() {
+    return "$id $title $path";
   }
 }
 
@@ -27,7 +42,22 @@ class AudiobookPlaylistItem {
     }
   }
 
+  @override
+  int get hashCode {
+    return toString().hashCode;
+  }
+
   List<AudiobookItem>? parts;
+
+  @override
+  bool operator ==(Object other) {
+    return toString() == other.toString();
+  }
+
+  @override
+  String toString() {
+    return "$id $title has parts: $hasParts";
+  }
 }
 
 class Achievement {
