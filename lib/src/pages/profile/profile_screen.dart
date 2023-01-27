@@ -36,9 +36,11 @@ class ProfileScreen extends StatelessWidget {
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         SizedBox(
           height: MediaConfig.getmediaHeight(context) / 6,
-          child: TextButton(onPressed: (){
-            Navigator.restorablePushNamed(context, Statistics.routeName);
-          },child: const Text('stats')),
+          child: TextButton(
+              onPressed: () {
+                Navigator.restorablePushNamed(context, Statistics.routeName);
+              },
+              child: const Text('stats')),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,11 +156,10 @@ class ProfileScreen extends StatelessWidget {
               width: MediaConfig.getmediaWidht(context) / 2,
               color: Colors.red,
               child: TextButton(onPressed: () {}, child: const Text('Log out')),
-              
             ),
           ],
         ),
-        Player(),
+        Player(innerPlayer: player),
       ]),
     );
   }

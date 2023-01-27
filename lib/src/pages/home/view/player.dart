@@ -7,19 +7,90 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 class Player extends StatefulWidget {
-  Player({super.key});
+  Player({super.key, required AudioPlayer this.innerPlayer});
+
+  AudioPlayer innerPlayer;
 
   @override
-  State<Player> createState() => _PlayerState();
+  State<Player> createState() => _PlayerState(
+      innerPlayer: innerPlayer,
+      pMethods: PlayerMethods(innerPlayer: innerPlayer));
 }
 
 class _PlayerState extends State<Player> {
-  void nextAudio() {
-    // start play music and change play button to pause icon
+  _PlayerState(
+      {required AudioPlayer this.innerPlayer,
+      required PlayerMethods this.pMethods});
 
+  AudioPlayer innerPlayer;
+
+  PlayerMethods pMethods;
+
+  void nextAudio() {
     setState(() {
       toggle = true;
     });
+    pMethods.nextAudio();
+  }
+
+  void previousAudio() {
+    setState((() {
+      toggle = true;
+    }));
+    pMethods.previousAudio();
+  }
+
+  void nextState() {
+    pMethods.nextState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      SizedBox(
+          child:
+              Text(CurrentPlayingMusicConfig.getAudiobook.title, maxLines: 1)),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        IconButton(
+            onPressed: () {
+              previousAudio();
+            },
+            icon: const Icon(Icons.skip_previous)),
+        IconButton(
+
+          key: UniqueKey(),
+          alignment: Alignment.bottomCenter,
+          icon: toggle
+              ? const Icon(Icons.pause)
+              : const Icon(
+                  Icons.play_arrow,
+                ),
+          onPressed: () {
+            setState(() {
+              nextState();
+            });
+          },
+        ),
+        IconButton(
+            onPressed: () {
+              nextAudio();
+            },
+            icon: const Icon(Icons.skip_next)),
+      ]),
+      AudioSlider(
+        innerPlayer: innerPlayer,
+      )
+    ]);
+  }
+}
+
+class PlayerMethods {
+  PlayerMethods({required AudioPlayer this.innerPlayer});
+
+  AudioPlayer innerPlayer;
+
+  void nextAudio() {
+    // start play music and change play button to pause icon
 
     var audiobook = CurrentPlayingMusicConfig.getAudiobook;
     var playlist = audiobook.parent;
@@ -39,9 +110,7 @@ class _PlayerState extends State<Player> {
 
   void previousAudio() {
     // start play music and change play button to pause icon
-    setState(() {
-      toggle = true;
-    });
+
     var audiobook = CurrentPlayingMusicConfig.getAudiobook;
     var playlist = audiobook.parent;
 
@@ -63,14 +132,14 @@ class _PlayerState extends State<Player> {
     if (musicPath != CurrentPlayingMusicConfig.getAudiobook.path) {
       print('loaded new instance');
       musicPath = CurrentPlayingMusicConfig.getAudiobook.path;
-      final duration = player.setFilePath(musicPath!);
+      final duration = innerPlayer.setFilePath(musicPath!);
     }
-    player.play();
-    print('play from ${player.position}');
+    innerPlayer.play();
+    print('play from ${innerPlayer.position}');
   }
 
   void pauseAudio() {
-    player.pause();
+    innerPlayer.pause();
   }
 
   void nextState() {
@@ -83,60 +152,35 @@ class _PlayerState extends State<Player> {
       print("good, audio stopped");
     }
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      SizedBox(
-          child:
-              Text(CurrentPlayingMusicConfig.getAudiobook.title, maxLines: 1)),
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        IconButton(
-            onPressed: () {
-              previousAudio();
-            },
-            icon: const Icon(Icons.skip_previous)),
-        IconButton(
-          key: UniqueKey(),
-          alignment: Alignment.bottomCenter,
-          icon: toggle
-              ? const Icon(Icons.pause)
-              : const Icon(
-                  Icons.play_arrow,
-                ),
-          onPressed: () {
-            setState(() {
-              nextState();
-            });
-          },
-        ),
-        IconButton(
-            onPressed: () {
-              nextAudio();
-            },
-            icon: const Icon(Icons.skip_next)),
-      ]),
-      AudioSlider()
-    ]);
-  }
 }
 
 class AudioSlider extends StatefulWidget {
-  AudioSlider({super.key});
+  AudioSlider({super.key, required AudioPlayer this.innerPlayer});
 
+  AudioPlayer innerPlayer;
   @override
-  State<AudioSlider> createState() => _AudioSlider();
+  State<AudioSlider> createState() => _AudioSlider(innerPlayer: innerPlayer);
 }
 
 class _AudioSlider extends State<AudioSlider> {
+  _AudioSlider({required this.innerPlayer});
+
+  AudioPlayer innerPlayer;
+  late Timer timer;
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      if (player.position.inSeconds > 0) {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (innerPlayer.position.inSeconds > 0) {
         setState(() {});
       }
     });
     super.initState();
+  }
+
+  @override
+  void deactivate() {
+    timer.cancel();
+    super.deactivate();
   }
 
   @override
@@ -153,21 +197,20 @@ class _AudioSlider extends State<AudioSlider> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(durationToHFormat(player.position.toString())),
+        Text(durationToHFormat(innerPlayer.position.toString())),
         SizedBox(
           width: MediaConfig.getmediaWidht(context) / 2,
           child: Slider(
-            
-            value: player.position.inMilliseconds.toDouble(),
-            max: player.duration?.inMilliseconds.toDouble() ?? 0,
+            value: innerPlayer.position.inMilliseconds.toDouble(),
+            max: innerPlayer.duration?.inMilliseconds.toDouble() ?? 0,
             onChanged: (value) {
-              player.seek(Duration(milliseconds: value.round()));
-              print(player.position);
+              innerPlayer.seek(Duration(milliseconds: value.round()));
+              print(innerPlayer.position);
               setState(() {});
             },
           ),
         ),
-        Text(durationToHFormat(player.duration.toString())),
+        Text(durationToHFormat(innerPlayer.duration.toString())),
       ],
     );
   }

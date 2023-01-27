@@ -94,7 +94,7 @@ class AudiobookExpandedScreen extends StatelessWidget {
             AudiobookOtherParts(audiobookPart: audiobookPart),
           ],
         ),
-        Player()
+        Player(innerPlayer: player),
       ]),
     );
   }

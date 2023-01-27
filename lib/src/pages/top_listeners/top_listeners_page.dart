@@ -145,7 +145,7 @@ class TopListeners extends StatelessWidget {
                     const Text('# 1'),
                   ],
                 )),
-            Player(),
+            Player(innerPlayer: player),
           ],
         ));
   }

@@ -39,10 +39,13 @@ class EditPage extends StatelessWidget {
             height: MediaConfig.getmediaHeight(context) / 6,
             child: Row(
               children: [
-                const Image(image: AssetImage('assets/images/flutter_logo.png')),
-                IconButton(onPressed: () async {
-                  await imageDialog();
-                }, icon: const Icon(Icons.edit)),
+                const Image(
+                    image: AssetImage('assets/images/flutter_logo.png')),
+                IconButton(
+                    onPressed: () async {
+                      await imageDialog();
+                    },
+                    icon: const Icon(Icons.edit)),
               ],
             )),
         Row(
@@ -115,7 +118,7 @@ class EditPage extends StatelessWidget {
                     ]))),
           ],
         ),
-        Player(),
+        Player(innerPlayer: player),
       ]),
     );
   }

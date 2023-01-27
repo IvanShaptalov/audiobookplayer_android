@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     if (AudiobookLoadingConfig.getAudiobookFolderPath == "") {
-      FolderPathDialog.saveAudiobookFolderPathDialog(context);
+      FolderPathDialog.saveAudiobookFolderPathDialog(context, player);
       print('audiobooks cashed');
       return Text('Loading...');
     } else {

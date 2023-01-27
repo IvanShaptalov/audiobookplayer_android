@@ -14,7 +14,6 @@ bool toggle = false;
 String? musicPath;
 AudioPlayer player = AudioPlayer();
 
-
 //not test
 class MediaConfig {
   static double getmediaHeight(context) {
@@ -26,6 +25,7 @@ class MediaConfig {
   }
 
   static getNormalSize(double current, double min, double max) {
+    // print("current ${current}");
     // print("current ${current}");
 
     double result = current < min
@@ -42,7 +42,6 @@ class MediaConfig {
     return MediaConfig();
   }
 }
-
 
 //tested
 class AudiobookLoadingConfig {
@@ -88,7 +87,11 @@ class AudiobookLoadingConfig {
 
     var loadedAudiobooks = await _convertAudiobooksFromFiles(files);
 
-    CurrentPlayingMusicConfig.updateCurrentPlayingAudiobook(loadedAudiobooks.first);
+    CurrentPlayingMusicConfig.updateCurrentPlayingAudiobook(
+        loadedAudiobooks.first);
+
+    // change toggle to false
+    toggle = false;
 
     return loadedAudiobooks;
   }
@@ -117,12 +120,16 @@ class AudiobookLoadingConfig {
 
 class FolderPathDialog {
   static Future<String> saveAudiobookFolderPathDialog(
-      BuildContext context) async {
+      BuildContext context, AudioPlayer player) async {
     dynamic result = await FilePicker.platform.getDirectoryPath();
     print(result.toString());
     AudiobookLoadingConfig.audiobookFolderPath = result.toString();
     await AudiobookSource.loadAndCashAudiobooksAsync();
     toggle = false;
+
+    if (player.playing){
+      player.stop();
+    }
     // ignore: await_only_futures, use_build_context_synchronously
     await Navigator.restorablePushNamed(context, HomePage.routeName);
 
@@ -131,15 +138,15 @@ class FolderPathDialog {
 }
 
 class CurrentPlayingMusicConfig {
-static AudiobookItem updateCurrentPlayingAudiobook(AudiobookPlaylistItem playlist){
-  if (playlist.hasParts){
-    _currentPlayingAudiobook = playlist.parts!.first;
+  static AudiobookItem updateCurrentPlayingAudiobook(
+      AudiobookPlaylistItem playlist) {
+    if (playlist.hasParts) {
+      _currentPlayingAudiobook = playlist.parts!.first;
+    } else {
+      _currentPlayingAudiobook = AudiobookItem.getAudiobookItem();
+    }
+    return _currentPlayingAudiobook;
   }
-  else{
-    _currentPlayingAudiobook = AudiobookItem.getAudiobookItem();
-  }
-  return _currentPlayingAudiobook;
-}
 
   static AudiobookItem _currentPlayingAudiobook =
       AudiobookItem.getAudiobookItem();

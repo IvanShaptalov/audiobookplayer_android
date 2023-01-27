@@ -27,6 +27,7 @@ class AudiobookSource {
   static Future<void> loadAndCashAudiobooksAsync() async {
     var audiobooks = await AudiobookLoadingConfig.getConvertedAudiobooks();
     cashedAudiobooks = audiobooks;
+    player.stop();
   }
 
 }

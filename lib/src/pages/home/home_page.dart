@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
 import 'package:audiobook_player/src/pages/libpage/view/library_screen.dart';
@@ -45,7 +46,6 @@ class _MyApp extends State {
                 // background, the navigation stack is restored.
                 Navigator.restorablePushNamed(context, SettingsView.routeName);
               },
-              
             ),
             IconButton(
               icon: const Icon(Icons.settings),
@@ -55,13 +55,15 @@ class _MyApp extends State {
                 // background, the navigation stack is restored.
                 Navigator.restorablePushNamed(context, SettingsView.routeName);
               },
-              
             ),
           ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [_pages.elementAt(_currentPage), Player()],
+          children: [
+            _pages.elementAt(_currentPage),
+            Player(innerPlayer: player),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
             items: const [

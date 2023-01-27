@@ -58,7 +58,7 @@ class AchievementsList extends StatelessWidget {
           children: [
             AchievementsWidget(items: items),
             const TopListenersLink(),
-            Player(),
+            Player(innerPlayer: player),
           ],
         ));
   }
