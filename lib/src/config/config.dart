@@ -86,8 +86,11 @@ class AudiobookLoadingConfig {
 
     var files = _loadAudiobooksFromFolder(audiobookFolder);
 
-    var loadedAudiobooks = _convertAudiobooksFromFiles(files);
-    return await loadedAudiobooks;
+    var loadedAudiobooks = await _convertAudiobooksFromFiles(files);
+
+    CurrentPlayingMusicConfig.updateCurrentPlayingAudiobook(loadedAudiobooks.first);
+
+    return loadedAudiobooks;
   }
 
   static Future<List<AudiobookPlaylistItem>> _convertAudiobooksFromFiles(
@@ -128,6 +131,16 @@ class FolderPathDialog {
 }
 
 class CurrentPlayingMusicConfig {
+static AudiobookItem updateCurrentPlayingAudiobook(AudiobookPlaylistItem playlist){
+  if (playlist.hasParts){
+    _currentPlayingAudiobook = playlist.parts!.first;
+  }
+  else{
+    _currentPlayingAudiobook = AudiobookItem.getAudiobookItem();
+  }
+  return _currentPlayingAudiobook;
+}
+
   static AudiobookItem _currentPlayingAudiobook =
       AudiobookItem.getAudiobookItem();
 
