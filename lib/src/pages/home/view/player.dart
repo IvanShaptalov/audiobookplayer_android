@@ -12,6 +12,7 @@ class Player extends StatefulWidget {
   AudioPlayer innerPlayer;
 
   @override
+  // ignore: no_logic_in_create_state
   State<Player> createState() => _PlayerState(
       innerPlayer: innerPlayer,
       pMethods: PlayerMethods(innerPlayer: innerPlayer));
@@ -19,8 +20,8 @@ class Player extends StatefulWidget {
 
 class _PlayerState extends State<Player> {
   _PlayerState(
-      {required AudioPlayer this.innerPlayer,
-      required PlayerMethods this.pMethods});
+      {required this.innerPlayer,
+      required this.pMethods});
 
   AudioPlayer innerPlayer;
 
@@ -57,7 +58,6 @@ class _PlayerState extends State<Player> {
             },
             icon: const Icon(Icons.skip_previous)),
         IconButton(
-
           key: UniqueKey(),
           alignment: Alignment.bottomCenter,
           icon: toggle
