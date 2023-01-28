@@ -18,10 +18,17 @@ class MyApp extends StatelessWidget {
     required this.settingsController,
   });
 
+  
+
   final SettingsController settingsController;
+
+  
 
   @override
   Widget build(BuildContext context) {
+
+    // Set documents local path
+  
     // Glue the SettingsController to the MaterialApp.
     //
     // The AnimatedBuilder Widget listens to the SettingsController for changes.

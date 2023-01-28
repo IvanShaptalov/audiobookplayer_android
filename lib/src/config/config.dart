@@ -8,19 +8,17 @@ import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-
 Uuid uuid = const Uuid();
 bool toggle = false;
 
 String? musicPath;
 AudioPlayer player = AudioPlayer();
 
-class AppLocales{
+class AppLocales {
   static const String appName = 'audiobook_player';
 }
 
 // set LocalDirectory to save cash
-
 
 //not test
 class MediaConfig {
@@ -64,7 +62,7 @@ class AudiobookLoadingConfig {
   static set audiobookFolderPath(String folderPath) =>
       _audiobookFolderPath = folderPath;
 
-  static get getAudiobookFolderPath => _audiobookFolderPath;
+  static String get getAudiobookFolderPath => _audiobookFolderPath;
 
   static List<FileSystemEntity> _loadAudiobooksFromFolder(String dirPath) {
     Directory dir = Directory(dirPath);
@@ -91,8 +89,11 @@ class AudiobookLoadingConfig {
     String audiobookFolder = AudiobookLoadingConfig.getAudiobookFolderPath;
     print('audiobooks folder in path: $audiobookFolder');
 
+    // load from folder
     var files = _loadAudiobooksFromFolder(audiobookFolder);
 
+
+    // convert files
     var loadedAudiobooks = await _convertAudiobooksFromFiles(files);
 
     CurrentPlayingMusicConfig.updateCurrentPlayingAudiobook(
@@ -125,25 +126,32 @@ class AudiobookLoadingConfig {
     return [playlist];
   }
 }
+
 //tested
 class FolderPathDialog {
   static Future<String> saveAudiobookFolderPathDialog(
       BuildContext context, AudioPlayer player) async {
-    dynamic result = await FilePicker.platform.getDirectoryPath();
+    String? result = await FilePicker.platform.getDirectoryPath();
     print(result.toString());
-    AudiobookLoadingConfig.audiobookFolderPath = result.toString();
-    await AudiobookSource.loadAndCashAudiobooksAsync();
-    toggle = false;
+    if (result is String) {
+      AudiobookLoadingConfig.audiobookFolderPath = result.toString();
+      await AudiobookSource.loadAndCashAudiobooksAsync();
+      toggle = false;
 
-    if (player.playing){
-      player.stop();
+      if (player.playing) {
+        player.stop();
+      }
+      await LocalPathProvider.saveMusicDirectoryPath(result.toString());
     }
+    result = AudiobookLoadingConfig.getAudiobookFolderPath;
+
     // ignore: await_only_futures, use_build_context_synchronously
     await Navigator.restorablePushNamed(context, HomePage.routeName);
 
     return result;
   }
 }
+
 //tested
 class CurrentPlayingMusicConfig {
   static AudiobookItem updateCurrentPlayingAudiobook(
@@ -168,4 +176,3 @@ class CurrentPlayingMusicConfig {
     _currentPlayingAudiobook = audiobook;
   }
 }
-

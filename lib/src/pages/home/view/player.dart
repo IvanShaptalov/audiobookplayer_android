@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 class Player extends StatefulWidget {
-  Player({super.key, required AudioPlayer this.innerPlayer});
+  Player({super.key, required this.innerPlayer});
 
   AudioPlayer innerPlayer;
 
@@ -85,7 +85,7 @@ class _PlayerState extends State<Player> {
 }
 
 class PlayerMethods {
-  PlayerMethods({required AudioPlayer this.innerPlayer});
+  PlayerMethods({required this.innerPlayer});
 
   AudioPlayer innerPlayer;
 
@@ -132,7 +132,7 @@ class PlayerMethods {
     if (musicPath != CurrentPlayingMusicConfig.getAudiobook.path) {
       print('loaded new instance');
       musicPath = CurrentPlayingMusicConfig.getAudiobook.path;
-      final duration = innerPlayer.setFilePath(musicPath!);
+      innerPlayer.setFilePath(musicPath!);
     }
     innerPlayer.play();
     print('play from ${innerPlayer.position}');
@@ -155,10 +155,11 @@ class PlayerMethods {
 }
 
 class AudioSlider extends StatefulWidget {
-  AudioSlider({super.key, required AudioPlayer this.innerPlayer});
+  AudioSlider({super.key, required this.innerPlayer});
 
   AudioPlayer innerPlayer;
   @override
+  // ignore: no_logic_in_create_state
   State<AudioSlider> createState() => _AudioSlider(innerPlayer: innerPlayer);
 }
 
@@ -169,7 +170,7 @@ class _AudioSlider extends State<AudioSlider> {
   late Timer timer;
   @override
   void initState() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (innerPlayer.position.inSeconds > 0) {
         setState(() {});
       }

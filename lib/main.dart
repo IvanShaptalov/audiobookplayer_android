@@ -10,6 +10,8 @@ import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
 void main() async {
+  // init bindings
+  WidgetsFlutterBinding.ensureInitialized();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
@@ -17,15 +19,21 @@ void main() async {
   // Load settings
   await settingsController.loadSettings();
 
-  // Set documents local path
-  await LocalPathProvider.setAppDocDirAsync();
+  print('load directory or not');
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
+  // create app directory if not exist
+  await LocalPathProvider.initAppDirectoryAndLocalFile();
+
+  //get Audiobook folder path from file
+  AudiobookLoadingConfig.audiobookFolderPath =
+      await LocalPathProvider.getSavedMusicDirectoryPath();
+
+  // load audiobooks if exist
   if (AudiobookLoadingConfig.getAudiobookFolderPath != "") {
     await AudiobookSource.loadAndCashAudiobooksAsync();
   }
-
+  // Run the app and pass in the SettingsController. The app listens to the
+  // SettingsController for changes, then passes it further down to the
+  // SettingsView.
   runApp(MyApp(settingsController: settingsController));
 }
