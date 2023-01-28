@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:audiobook_player/src/config/config.dart';
+import 'package:audiobook_player/src/config/path_provider.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +14,11 @@ void main() async {
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
 
-  // Load the user's preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
+  // Load settings
   await settingsController.loadSettings();
+
+  // Set documents local path
+  await LocalPathProvider.setAppDocDirAsync();
 
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:audiobook_player/src/config/path_provider.dart';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:just_audio/just_audio.dart';
@@ -6,13 +7,20 @@ import 'package:uuid/uuid.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+
 
 Uuid uuid = const Uuid();
 bool toggle = false;
 
 String? musicPath;
 AudioPlayer player = AudioPlayer();
+
+class AppLocales{
+  static const String appName = 'audiobook_player';
+}
+
+// set LocalDirectory to save cash
+
 
 //not test
 class MediaConfig {
@@ -117,7 +125,7 @@ class AudiobookLoadingConfig {
     return [playlist];
   }
 }
-
+//tested
 class FolderPathDialog {
   static Future<String> saveAudiobookFolderPathDialog(
       BuildContext context, AudioPlayer player) async {
@@ -136,7 +144,7 @@ class FolderPathDialog {
     return result;
   }
 }
-
+//tested
 class CurrentPlayingMusicConfig {
   static AudiobookItem updateCurrentPlayingAudiobook(
       AudiobookPlaylistItem playlist) {
@@ -160,3 +168,4 @@ class CurrentPlayingMusicConfig {
     _currentPlayingAudiobook = audiobook;
   }
 }
+
