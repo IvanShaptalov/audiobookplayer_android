@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/home_page.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';

@@ -1,14 +1,8 @@
-import 'dart:io';
-import 'package:audiobook_player/src/config/path_provider.dart';
-import 'package:audiobook_player/src/pages/home/home_page.dart';
-import 'package:audiobook_player/src/pages/home/view/source.dart';
+import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
 import 'package:audiobook_player/src/pages/sample_item.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -57,7 +51,7 @@ class MediaConfig {
 //tested
 class AudiobookLoadingConfig {
   // set extensions that allowed to scan and save
-  static const ALLOWED_EXTENSIONS = [
+  static const allowedExtensions = [
     'mp3',
   ];
 
@@ -90,7 +84,7 @@ class AudiobookLoadingConfig {
 
     for (var audiobook in loadedAudiobooks) {
       print(audiobook.fileExtension);
-      if (ALLOWED_EXTENSIONS.contains(audiobook.fileExtension)){
+      if (allowedExtensions.contains(audiobook.fileExtension)){
           convertedAudiobooks.add(AudiobookItem(
           uuid.v1(),
           audiobook.displayName,
@@ -163,7 +157,9 @@ class CurrentPlayingMusicConfig {
   }
 
   static set setMusic(AudiobookItem audiobook) {
-    print(audiobook);
+    if (kDebugMode) {
+      print(audiobook);
+    }
     _currentPlayingAudiobook = audiobook;
   }
 }

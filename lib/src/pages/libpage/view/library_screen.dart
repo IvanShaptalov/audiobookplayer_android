@@ -52,7 +52,7 @@ class Library extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.6,
           child: LibAudiobooks(items: items!));
     } else {
-      return Column(children: [Text('loading, please wait')]);
+      return Column(children: const [Text('loading, please wait')]);
     }
   }
 }

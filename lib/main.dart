@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/config/path_provider.dart';
 import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +16,6 @@ void main() async {
   // Load settings
   await settingsController.loadSettings();
 
-  print('load directory or not');
 
   // create app directory if not exist
   await LocalPathProvider.initAppDirectoryAndLocalFile();

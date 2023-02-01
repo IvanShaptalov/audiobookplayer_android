@@ -12,7 +12,7 @@ class AudiobookItem {
   static AudiobookItem getAudiobookItem() {
     var playlist = AudiobookPlaylistItem(-1, 'pure playlist', null);
     return AudiobookItem('dalskjfhnjk', 'red-indian-music', playlist, 'adsf',
-        'asdf', Duration(seconds: 125), 'assets/audio/red-indian-music.mp3');
+        'asdf', const Duration(seconds: 125), 'assets/audio/red-indian-music.mp3');
   }
 
   @override

@@ -1,4 +1,7 @@
 import 'dart:io';
+// ignore: depend_on_referenced_packages
+import 'package:flutter/foundation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as p;
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:path_provider/path_provider.dart';
@@ -17,7 +20,9 @@ class LocalPathProvider {
     // create local file to store data
     await _createCashLocal();
 
-    print(' localpath: ${LocalPathProvider.appDocPath}');
+    if (kDebugMode) {
+      print(' localpath: ${LocalPathProvider.appDocPath}');
+    }
   }
 
   static Future<bool> deleteAppFolder() async{
@@ -31,7 +36,7 @@ class LocalPathProvider {
     return !await dir.exists();
   }
 
-  static Future<bool> saveMusicDirectoryPath(String musicPath) async { //TODO create test
+  static Future<bool> saveMusicDirectoryPath(String musicPath) async { 
     //create cash file if not exists
     await _createCashLocal();
     assert(cashLocalPath is String);
@@ -39,32 +44,12 @@ class LocalPathProvider {
     var file = File(cashLocalPath!);
     if (await file.exists()) {
       await file.writeAsString(musicPath);
-      // file saved TODO write file
+      // file saved
       return true;
     }
     // file not exists
     return false;
   }
-
-  // TODO create next test cases:  audiobook path empty
-  //path not empty
-  //path broken
-  //path changed
-  
-  // static Future<String> getSavedMusicDirectoryPath() async{ //TODO create test 
-  //   assert(appDocPath is String, true);
-  //   assert(cashLocalPath is String, true);
-
-  //   var file = File(cashLocalPath!);
-  //   assert(file.existsSync());
-  //   String musicDirPath = file.readAsStringSync();
-  //   if (await Directory(musicDirPath).exists()){
-  //     // return new dir if exist
-  //     return musicDirPath;
-  //   }
-  //   // return default if new dir not exists
-  //   return AudiobookLoadingConfig.getAudiobookFolderPath;
-  // }
 
   // use this method to create appDocPath
   static Future<Directory> _createAppDir(String docDir) async {

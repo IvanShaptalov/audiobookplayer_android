@@ -44,7 +44,6 @@ void main() {
 
       // Verify myWidget shows some text
 
-      print(find.byIcon(Icons.play_arrow).description);
       expect(find.byIcon(Icons.play_arrow), findsOneWidget); // find play button
 
       await tester.tap(find.byIcon(Icons.play_arrow)); // click
