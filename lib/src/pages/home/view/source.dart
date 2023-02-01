@@ -25,7 +25,7 @@ class AudiobookSource {
   static List<AudiobookPlaylistItem>? cashedAudiobooks;
 
   static Future<void> loadAndCashAudiobooksAsync() async {
-    var audiobooks = await AudiobookLoadingConfig.getConvertedAudiobooks();
+    var audiobooks = await AudiobookLoadingConfig.getConvertedAudiobooks(null);
     cashedAudiobooks = audiobooks;
     player.stop();
   }

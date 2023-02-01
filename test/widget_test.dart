@@ -57,67 +57,66 @@ void main() {
 
       expect(testPlayer.playing, false); // check that player stopped
     });
-  });
 
-  testWidgets('test music playing after next button clicked',
-      (WidgetTester tester) async {
-    
-    // *******************************CREATE PLAYER
-    AudioPlayer testPlayer = AudioPlayer();
-    var myWidget =
-        MaterialApp(home: Scaffold(body: Player(innerPlayer: testPlayer)));
+    testWidgets('test music playing after next button clicked',
+        (WidgetTester tester) async {
+      // *******************************CREATE PLAYER
+      AudioPlayer testPlayer = AudioPlayer();
+      var myWidget =
+          MaterialApp(home: Scaffold(body: Player(innerPlayer: testPlayer)));
 
-    // ********************************UPDATE WIDGETS
-    await tester.pumpWidget(myWidget);
+      // ********************************UPDATE WIDGETS
+      await tester.pumpWidget(myWidget);
 
-    //expect that player not playing right now
+      //expect that player not playing right now
 
-    expect(testPlayer.playing, false); 
+      expect(testPlayer.playing, false);
 
-    // ********************************TEST SKIP_NEXT
-     // find skip next button
+      // ********************************TEST SKIP_NEXT
+      // find skip next button
 
-    expect(find.byIcon(Icons.skip_next), findsOneWidget);
+      expect(find.byIcon(Icons.skip_next), findsOneWidget);
 
-    // click next button
+      // click next button
 
-    await tester.tap(find.byIcon(Icons.skip_next)); 
+      await tester.tap(find.byIcon(Icons.skip_next));
 
-    await tester.pumpWidget(myWidget);
+      await tester.pumpWidget(myWidget);
 
-    // check that player is play
+      // check that player is play
 
-    expect(testPlayer.playing, true);
+      expect(testPlayer.playing, true);
 
-    // pause player 
+      // pause player
 
-    await tester.tap(find.byIcon(Icons.pause)); 
+      await tester.tap(find.byIcon(Icons.pause));
 
-    // check that player stopped
+      // check that player stopped
 
-    expect(testPlayer.playing, false); 
-    // **********************************TEST SKIP_PREVIOUS
+      expect(testPlayer.playing, false);
+      // **********************************TEST SKIP_PREVIOUS
 
-    // find skip previous button
+      // find skip previous button
 
-    expect(find.byIcon(Icons.skip_previous), findsOneWidget);
+      expect(find.byIcon(Icons.skip_previous), findsOneWidget);
 
-    // click next button
+      // click next button
 
-    await tester.tap(find.byIcon(Icons.skip_previous)); 
+      await tester.tap(find.byIcon(Icons.skip_previous));
 
-    // update
+      // update
 
-    await tester.pumpWidget(myWidget);
+      await tester.pumpWidget(myWidget);
 
-    expect(testPlayer.playing, true);
+      expect(testPlayer.playing, true);
 
-    // pause player 
+      // pause player
 
-    await tester.tap(find.byIcon(Icons.pause)); 
+      await tester.tap(find.byIcon(Icons.pause));
 
-    // check that player stopped
+      // check that player stopped
 
-    expect(testPlayer.playing, false); 
+      expect(testPlayer.playing, false);
+    });
   });
 }

@@ -1,21 +1,24 @@
 class AudiobookItem {
-  AudiobookItem(this.id, this.title, this.parent, this.path);
+  AudiobookItem(this.id, this.title, this.parent, this.album, this.artist,
+      this.duration, this.path);
   String title;
   String id;
   AudiobookPlaylistItem parent;
+  String album;
+  Duration duration;
+  String artist;
   String path;
 
   static AudiobookItem getAudiobookItem() {
     var playlist = AudiobookPlaylistItem(-1, 'pure playlist', null);
-    return AudiobookItem('dalskjfhnjk', 'red-indian-music', playlist,
-        'assets/audio/red-indian-music.mp3');
+    return AudiobookItem('dalskjfhnjk', 'red-indian-music', playlist, 'adsf',
+        'asdf', Duration(seconds: 125), 'assets/audio/red-indian-music.mp3');
   }
 
   @override
   int get hashCode {
     return toString().hashCode;
   }
-
 
   @override
   bool operator ==(Object other) {

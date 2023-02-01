@@ -51,20 +51,20 @@ class LocalPathProvider {
   //path broken
   //path changed
   
-  static Future<String> getSavedMusicDirectoryPath() async{ //TODO create test 
-    assert(appDocPath is String, true);
-    assert(cashLocalPath is String, true);
+  // static Future<String> getSavedMusicDirectoryPath() async{ //TODO create test 
+  //   assert(appDocPath is String, true);
+  //   assert(cashLocalPath is String, true);
 
-    var file = File(cashLocalPath!);
-    assert(file.existsSync());
-    String musicDirPath = file.readAsStringSync();
-    if (await Directory(musicDirPath).exists()){
-      // return new dir if exist
-      return musicDirPath;
-    }
-    // return default if new dir not exists
-    return AudiobookLoadingConfig.getAudiobookFolderPath;
-  }
+  //   var file = File(cashLocalPath!);
+  //   assert(file.existsSync());
+  //   String musicDirPath = file.readAsStringSync();
+  //   if (await Directory(musicDirPath).exists()){
+  //     // return new dir if exist
+  //     return musicDirPath;
+  //   }
+  //   // return default if new dir not exists
+  //   return AudiobookLoadingConfig.getAudiobookFolderPath;
+  // }
 
   // use this method to create appDocPath
   static Future<Directory> _createAppDir(String docDir) async {

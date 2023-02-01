@@ -45,16 +45,16 @@ class SettingsView extends StatelessWidget {
               )
             ],
           ),
-          TextButton(
-              onPressed: () {
-                AudiobookSource.cashedAudiobooks = null;
+          // TextButton(
+          //     onPressed: () {
+          //       AudiobookSource.cashedAudiobooks = null;
 
-                FolderPathDialog.saveAudiobookFolderPathDialog(context, player);
-              },
-              child: Row(children: const [
-                Icon(Icons.folder),
-                Text('audiobook folders')
-              ])),
+          //       // FolderPathDialog.saveAudiobookFolderPathDialog(context, player);
+          //     },
+          //     child: Row(children: const [
+          //       Icon(Icons.folder),
+          //       Text('audiobook folders')
+          //     ])),
           DropdownButton<ThemeMode>(
             // Read the selected themeMode from the controller
             value: controller.themeMode,
