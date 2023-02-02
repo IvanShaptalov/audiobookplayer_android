@@ -27,11 +27,10 @@ class _PlayerState extends State<Player> {
 
   StreamSubscription? toggleSub;
 
-
   @override
   void initState() {
-    toggleSub = pMethods.toggleListener().listen((event) {
-      print('event');
+    toggleSub = pMethods.toggleListener(innerPlayer).listen((event) {
+      print('eventnow !!!!$event');
       setState(() {});
     });
     super.initState();
@@ -39,23 +38,19 @@ class _PlayerState extends State<Player> {
 
   @override
   void dispose() {
-    if (toggleSub != null){
+    if (toggleSub != null) {
       toggleSub!.cancel();
     }
     super.dispose();
   }
 
   void nextAudio() {
-    setState(() {
-      toggle = true;
-    });
+    setState(() {});
     pMethods.nextAudio();
   }
 
   void previousAudio() {
-    setState((() {
-      toggle = true;
-    }));
+    setState((() {}));
     pMethods.previousAudio();
   }
 
@@ -78,7 +73,7 @@ class _PlayerState extends State<Player> {
         IconButton(
           key: UniqueKey(),
           alignment: Alignment.bottomCenter,
-          icon: toggle
+          icon: innerPlayer.playing
               ? const Icon(Icons.pause)
               : const Icon(
                   Icons.play_arrow,
@@ -107,14 +102,15 @@ class PlayerMethods {
 
   AudioPlayer innerPlayer;
 
-  Stream<bool> toggleListener() async* {
-    print('started listed toggle, now : $toggle');
-    bool innerToggle = toggle;
+  Stream<bool> toggleListener(AudioPlayer innerPlayer) async* {
+    print('started listed toggle, now : $innerPlayer.playing');
+    bool innerToggle = innerPlayer.playing;
     while (true) {
-      await Future.delayed(Duration(seconds: 1));
-      if (innerToggle != toggle) {
-        print('toggle changed to : $toggle');
-        innerToggle = toggle;
+      await Future.delayed(const Duration(seconds: 1));
+      if (innerToggle != innerPlayer.playing) {
+        print('toggle changed to : $innerPlayer.playing');
+        innerToggle = innerPlayer.playing;
+        yield innerToggle;
       }
     }
   }
@@ -170,11 +166,10 @@ class PlayerMethods {
   }
 
   void nextState() {
-    toggle = !toggle;
-    if (toggle) {
-      playAudio();
-    } else {
+    if (innerPlayer.playing) {
       pauseAudio();
+    } else {
+      playAudio();
     }
   }
 }
@@ -196,10 +191,6 @@ class _AudioSlider extends State<AudioSlider> {
   @override
   void initState() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!innerPlayer.playing) {
-        toggle = false;
-      }
-
       if (innerPlayer.position.inSeconds > 0) {
         setState(() {});
       }

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 Uuid uuid = const Uuid();
-bool toggle = false;  // false mean player not play
 
 
 String? musicPath;
@@ -106,7 +105,6 @@ class AudiobookLoadingConfig {
     //     loadedAudiobooks.first);
 
     // change toggle to false
-    toggle = false;
 
     return [unnalocatedPlaylist];
   }
