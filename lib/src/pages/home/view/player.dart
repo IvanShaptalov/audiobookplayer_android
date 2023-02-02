@@ -19,13 +19,31 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
-  _PlayerState(
-      {required this.innerPlayer,
-      required this.pMethods});
+  _PlayerState({required this.innerPlayer, required this.pMethods});
 
   AudioPlayer innerPlayer;
 
   PlayerMethods pMethods;
+
+  StreamSubscription? toggleSub;
+
+
+  @override
+  void initState() {
+    toggleSub = pMethods.toggleListener().listen((event) {
+      print('event');
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (toggleSub != null){
+      toggleSub!.cancel();
+    }
+    super.dispose();
+  }
 
   void nextAudio() {
     setState(() {
@@ -89,6 +107,18 @@ class PlayerMethods {
 
   AudioPlayer innerPlayer;
 
+  Stream<bool> toggleListener() async* {
+    print('started listed toggle, now : $toggle');
+    bool innerToggle = toggle;
+    while (true) {
+      await Future.delayed(Duration(seconds: 1));
+      if (innerToggle != toggle) {
+        print('toggle changed to : $toggle');
+        innerToggle = toggle;
+      }
+    }
+  }
+
   void nextAudio() {
     // start play music and change play button to pause icon
 
@@ -128,14 +158,11 @@ class PlayerMethods {
   }
 
   void playAudio() {
-    print("are you work?");
     if (musicPath != CurrentPlayingMusicConfig.getAudiobook.path) {
-      print('loaded new instance');
       musicPath = CurrentPlayingMusicConfig.getAudiobook.path;
       innerPlayer.setFilePath(musicPath!);
     }
     innerPlayer.play();
-    print('play from ${innerPlayer.position}');
   }
 
   void pauseAudio() {
@@ -146,10 +173,8 @@ class PlayerMethods {
     toggle = !toggle;
     if (toggle) {
       playAudio();
-      print("good, audio played");
     } else {
       pauseAudio();
-      print("good, audio stopped");
     }
   }
 }
@@ -171,6 +196,10 @@ class _AudioSlider extends State<AudioSlider> {
   @override
   void initState() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!innerPlayer.playing) {
+        toggle = false;
+      }
+
       if (innerPlayer.position.inSeconds > 0) {
         setState(() {});
       }
@@ -179,8 +208,18 @@ class _AudioSlider extends State<AudioSlider> {
   }
 
   @override
+  void dispose() {
+    if (timer.isActive) {
+      timer.cancel();
+    }
+    super.dispose();
+  }
+
+  @override
   void deactivate() {
-    timer.cancel();
+    if (timer.isActive) {
+      timer.cancel();
+    }
     super.deactivate();
   }
 
@@ -192,6 +231,7 @@ class _AudioSlider extends State<AudioSlider> {
       }
       var reversed = stringDuration.split('').reversed.join();
       var cutted = reversed.substring(reversed.indexOf('.') + 1);
+
       return cutted.split('').reversed.join();
     }
 
@@ -202,11 +242,11 @@ class _AudioSlider extends State<AudioSlider> {
         SizedBox(
           width: MediaConfig.getmediaWidht(context) / 2,
           child: Slider(
+            min: 0,
             value: innerPlayer.position.inMilliseconds.toDouble(),
             max: innerPlayer.duration?.inMilliseconds.toDouble() ?? 0,
             onChanged: (value) {
               innerPlayer.seek(Duration(milliseconds: value.round()));
-              print(innerPlayer.position);
               setState(() {});
             },
           ),

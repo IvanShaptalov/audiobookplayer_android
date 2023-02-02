@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 Uuid uuid = const Uuid();
-bool toggle = false;
+bool toggle = false;  // false mean player not play
+
 
 String? musicPath;
 AudioPlayer player = AudioPlayer();
@@ -83,7 +84,6 @@ class AudiobookLoadingConfig {
     }
 
     for (var audiobook in loadedAudiobooks) {
-      print(audiobook.fileExtension);
       if (allowedExtensions.contains(audiobook.fileExtension)){
           convertedAudiobooks.add(AudiobookItem(
           uuid.v1(),

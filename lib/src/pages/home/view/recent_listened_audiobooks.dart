@@ -100,8 +100,8 @@ class RecentListenedAudiobooks extends StatelessWidget {
                           Navigator.restorablePushNamed(
                               context, HomePage.routeName);
                         },
-                        icon: Icon(Icons.refresh)),
-                    Text('loading, refresh please')
+                        icon: const Icon(Icons.refresh)),
+                    const Text('loading, refresh please')
                   ])),
       ),
     ]);
