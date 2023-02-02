@@ -200,17 +200,13 @@ class _AudioSlider extends State<AudioSlider> {
 
   @override
   void dispose() {
-    if (timer.isActive) {
       timer.cancel();
-    }
     super.dispose();
   }
 
   @override
   void deactivate() {
-    if (timer.isActive) {
       timer.cancel();
-    }
     super.deactivate();
   }
 
