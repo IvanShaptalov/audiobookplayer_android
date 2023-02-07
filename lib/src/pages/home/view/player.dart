@@ -59,7 +59,7 @@ class _PlayerState extends State<Player> {
   }
 
   void jumpTo(int seconds) {
-    pMethods.jumpTo(seconds);
+    pMethods.jumpTo(seconds, SeekOperation.add);
     setState(() {});
   }
 
@@ -120,6 +120,11 @@ class _PlayerState extends State<Player> {
   }
 }
 
+enum SeekOperation {
+  replace,
+  add,
+}
+
 class PlayerMethods {
   PlayerMethods({required this.innerPlayer});
 
@@ -138,23 +143,34 @@ class PlayerMethods {
     }
   }
 
-  void jumpTo(int seconds) {
+  void jumpTo(int seconds, SeekOperation operation) {
     //TODO test jump
     int minPositionSeconds = 0;
     int? maxPositionSeconds = innerPlayer.duration?.inSeconds;
-    int validatedSeconds =
-        validateJump(seconds, minPositionSeconds, maxPositionSeconds);
+    int validatedSeconds = validateJump(
+        seconds, minPositionSeconds, maxPositionSeconds,
+        seekOperation: operation);
     print('jumped');
     innerPlayer.seek(Duration(seconds: validatedSeconds));
   }
 
-  int validateJump(int currentValue, int minValue, int? maxValue) {
+  int validateJump(int currentValue, int minValue, int? maxValue,
+      {seekOperation = SeekOperation.add}) {
     //TODO test validate jump
     int currentPosition = innerPlayer.position.inSeconds;
 
     //set minmax position
-
-    int jumpDurationSeconds = currentPosition + currentValue;
+    int jumpDurationSeconds;
+    switch (seekOperation) {
+      case SeekOperation.add:
+        jumpDurationSeconds = currentPosition + currentValue;
+        break;
+      case SeekOperation.replace:
+        jumpDurationSeconds = currentValue;
+        break;
+      default:
+        jumpDurationSeconds = currentPosition + currentValue;
+    }
 
     if (jumpDurationSeconds <= minValue) {
       return minValue;
@@ -275,6 +291,12 @@ class _AudioSlider extends State<AudioSlider> {
       return cutted.split('').reversed.join();
     }
 
+    PlayerMethods pm = PlayerMethods(innerPlayer: innerPlayer);
+
+    void jumpToPosition(int seconds) {
+      pm.jumpTo(seconds, SeekOperation.replace);
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -286,7 +308,7 @@ class _AudioSlider extends State<AudioSlider> {
             value: innerPlayer.position.inMilliseconds.toDouble(),
             max: innerPlayer.duration?.inMilliseconds.toDouble() ?? 0,
             onChanged: (value) {
-              innerPlayer.seek(Duration(milliseconds: value.round()));
+              jumpToPosition((value/1000).round());
               setState(() {});
             },
           ),

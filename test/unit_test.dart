@@ -26,12 +26,33 @@ void main() {
       });
     });
     group('Player', () {
-      test('jump seconds validation', () async {
+      test('jump seconds validation add operator', () async {
         AudioPlayer p = AudioPlayer();
         var pm = PlayerMethods(innerPlayer: p);
 
         // expect max value
-        expect(pm.validateJump(13, 0, 10), 10);
+        expect(
+            pm.validateJump(13, 0, 10, seekOperation: SeekOperation.add), 10);
+
+        // expect max value
+        expect(pm.validateJump(10, 0, 10), 10);
+
+        // expect current value
+        expect(pm.validateJump(5, 0, 10), 5);
+
+        // expect min value
+        expect(pm.validateJump(-5, 0, 10), 0);
+
+        // expect min value
+        expect(pm.validateJump(0, 0, 10), 0);
+      });
+      test('jump seconds validation replace', () async {
+        AudioPlayer p = AudioPlayer();
+        var pm = PlayerMethods(innerPlayer: p);
+
+        // expect max value
+        expect(pm.validateJump(13, 0, 10, seekOperation: SeekOperation.replace),
+            10);
 
         // expect max value
         expect(pm.validateJump(10, 0, 10), 10);
