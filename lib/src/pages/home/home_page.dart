@@ -3,6 +3,7 @@
 import 'package:audiobook_player/src/config/config.dart';
 import 'package:audiobook_player/src/pages/home/view/home_screen.dart';
 import 'package:audiobook_player/src/pages/home/view/player.dart';
+import 'package:audiobook_player/src/pages/home/view/source.dart';
 import 'package:audiobook_player/src/pages/libpage/view/library_screen.dart';
 import 'package:audiobook_player/src/pages/profile/profile_screen.dart';
 import 'package:audiobook_player/src/pages/search_page/view/search_page.dart';
@@ -39,13 +40,11 @@ class _MyApp extends State {
           title: Text(_pageTitles.elementAt(_currentPage)),
           actions: [
             IconButton(
-              icon: const Icon(Icons.history),
-              onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
-              },
+              onPressed: (() async {
+                AudiobookSource.loadAndCashAudiobooksAsync();
+                Navigator.restorablePushNamed(context, HomePage.routeName);
+              }),
+              icon: const Icon(Icons.screen_rotation_alt),
             ),
             IconButton(
               icon: const Icon(Icons.settings),
