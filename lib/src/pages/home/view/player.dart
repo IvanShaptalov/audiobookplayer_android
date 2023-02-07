@@ -27,12 +27,21 @@ class _PlayerState extends State<Player> {
 
   StreamSubscription? toggleSub;
 
+  StreamSubscription? soundTitleSub;
+
   @override
   void initState() {
     toggleSub = pMethods.toggleListener(innerPlayer).listen((event) {
       print('eventnow !!!!$event');
       setState(() {});
     });
+    soundTitleSub = pMethods
+        .audioTitleListener(CurrentPlayingMusicConfig.getAudiobook.title)
+        .listen((event) {
+      print('reacted, changed to $event');
+      setState(() {});
+    });
+    // add title listener
     super.initState();
   }
 
@@ -40,6 +49,9 @@ class _PlayerState extends State<Player> {
   void dispose() {
     if (toggleSub != null) {
       toggleSub!.cancel();
+    }
+    if (soundTitleSub != null) {
+      soundTitleSub!.cancel();
     }
     super.dispose();
   }
@@ -143,6 +155,18 @@ class PlayerMethods {
     }
   }
 
+  Stream<String> audioTitleListener(String currentAudioSongTitle) async* {
+    String oldString = '';
+    while (true) {
+      await Future.delayed(const Duration(seconds: 1));
+      if (oldString != currentAudioSongTitle) {
+        oldString = currentAudioSongTitle;
+        print('title changed!');
+        yield oldString;
+      }
+    }
+  }
+
   void jumpTo(int seconds, SeekOperation operation) {
     //TODO test jump
     int minPositionSeconds = 0;
@@ -240,7 +264,6 @@ class PlayerMethods {
     }
   }
 
-  void _validateJump() {}
 }
 
 class AudioSlider extends StatefulWidget {
@@ -262,12 +285,17 @@ class _AudioSlider extends State<AudioSlider> {
     PlayerMethods pm = PlayerMethods(innerPlayer: innerPlayer);
 
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (innerPlayer.position.inSeconds == innerPlayer.duration!.inSeconds) {
-        pm.nextAudio();
+      print('i work');
+      
+      if (innerPlayer.position.inSeconds > 0) {
+        setState(() {});
       }
-      if (innerPlayer.position.inSeconds > 0) {}
-      setState(() {});
+      if (innerPlayer.duration != null &&innerPlayer.position.inSeconds >= innerPlayer.duration!.inSeconds) {
+          pm.nextAudio();
+        }
+      
     });
+
     super.initState();
   }
 
