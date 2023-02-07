@@ -259,10 +259,14 @@ class _AudioSlider extends State<AudioSlider> {
   late Timer timer;
   @override
   void initState() {
+    PlayerMethods pm = PlayerMethods(innerPlayer: innerPlayer);
+
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (innerPlayer.position.inSeconds > 0) {
-        setState(() {});
+      if (innerPlayer.position.inSeconds == innerPlayer.duration!.inSeconds) {
+        pm.nextAudio();
       }
+      if (innerPlayer.position.inSeconds > 0) {}
+      setState(() {});
     });
     super.initState();
   }
@@ -297,6 +301,11 @@ class _AudioSlider extends State<AudioSlider> {
       pm.jumpTo(seconds, SeekOperation.replace);
     }
 
+    var max = innerPlayer.duration?.inMilliseconds.toDouble() ?? 0;
+    double currentValue = innerPlayer.position.inMilliseconds.toDouble() <= max
+        ? innerPlayer.position.inMilliseconds.toDouble()
+        : max;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -305,10 +314,10 @@ class _AudioSlider extends State<AudioSlider> {
           width: MediaConfig.getmediaWidht(context) / 2,
           child: Slider(
             min: 0,
-            value: innerPlayer.position.inMilliseconds.toDouble(),
-            max: innerPlayer.duration?.inMilliseconds.toDouble() ?? 0,
+            value: currentValue,
+            max: max,
             onChanged: (value) {
-              jumpToPosition((value/1000).round());
+              jumpToPosition((value / 1000).round());
               setState(() {});
             },
           ),
