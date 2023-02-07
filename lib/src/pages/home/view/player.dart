@@ -58,6 +58,11 @@ class _PlayerState extends State<Player> {
     pMethods.nextState();
   }
 
+  void jumpTo(int seconds) {
+    pMethods.jumpTo(seconds);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -65,6 +70,15 @@ class _PlayerState extends State<Player> {
           child:
               Text(CurrentPlayingMusicConfig.getAudiobook.title, maxLines: 1)),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Column(
+          children: [
+            const Text('10'),
+            IconButton(
+              onPressed: () => jumpTo(-10),
+              icon: const Icon(Icons.arrow_circle_left_outlined),
+            ),
+          ],
+        ),
         IconButton(
             onPressed: () {
               previousAudio();
@@ -89,6 +103,15 @@ class _PlayerState extends State<Player> {
               nextAudio();
             },
             icon: const Icon(Icons.skip_next)),
+        Column(
+          children: [
+            const Text('10'),
+            IconButton(
+              onPressed: () => jumpTo(10),
+              icon: const Icon(Icons.arrow_circle_right_outlined),
+            ),
+          ],
+        ),
       ]),
       AudioSlider(
         innerPlayer: innerPlayer,
@@ -113,6 +136,34 @@ class PlayerMethods {
         yield innerToggle;
       }
     }
+  }
+
+  void jumpTo(int seconds) {
+    //TODO test jump
+    int minPositionSeconds = 0;
+    int? maxPositionSeconds = innerPlayer.duration?.inSeconds;
+    int validatedSeconds =
+        validateJump(seconds, minPositionSeconds, maxPositionSeconds);
+    print('jumped');
+    innerPlayer.seek(Duration(seconds: validatedSeconds));
+  }
+
+  int validateJump(int currentValue, int minValue, int? maxValue) {
+    //TODO test validate jump
+    int currentPosition = innerPlayer.position.inSeconds;
+
+    //set minmax position
+
+    int jumpDurationSeconds = currentPosition + currentValue;
+
+    if (jumpDurationSeconds <= minValue) {
+      return minValue;
+    }
+    if (maxValue != null && jumpDurationSeconds >= maxValue) {
+      return maxValue;
+    }
+
+    return jumpDurationSeconds;
   }
 
   void nextAudio() {
@@ -172,6 +223,8 @@ class PlayerMethods {
       playAudio();
     }
   }
+
+  void _validateJump() {}
 }
 
 class AudioSlider extends StatefulWidget {
@@ -200,13 +253,13 @@ class _AudioSlider extends State<AudioSlider> {
 
   @override
   void dispose() {
-      timer.cancel();
+    timer.cancel();
     super.dispose();
   }
 
   @override
   void deactivate() {
-      timer.cancel();
+    timer.cancel();
     super.deactivate();
   }
 
